@@ -188,7 +188,6 @@ Server = https://mirrors.sjtug.sjtu.edu.cn/manjarostable/$repo/$arch
 
 在 `/etc/pacman.conf` 末尾加上：
 
-/etc/pacman.conf
 ```xxx /etc/pacman.conf
 [archlinuxcn]
 #SigLevel = Optional TrustedOnly
