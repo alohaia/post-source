@@ -1,0 +1,13 @@
+# vim: set fenc=utf-8 ft=dosini:
+
+[run]
+# command=hexo g && set -m && hexo s & ; xdg-open http://localhost:4000/ && fg %hexo\ s
+command=hexo g && xdg-open http://localhost:4000 && hexo s
+output=terminal
+cwd=$(VIM_FILEDIR)
+save=2
+[build]
+command=hexo g && npm run deploy
+output=terminal
+cwd=$(VIM_FILEDIR)
+save=2
