@@ -155,4 +155,19 @@ markdown_it_plus:
                 ulClass: task-list
                 liClass: task-list-item
 
-
+# RSS
+feed:
+    enable: true
+    type:
+        - atom
+        - rss2
+    path:
+        - atom.xml
+        - rss2.xml
+    limit: 20
+    hub:
+    content:
+    order_by: -date
+    icon: icon.png
+    content_limit:
+    content_limit_delim: ' '
