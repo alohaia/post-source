@@ -7,9 +7,7 @@ tags:
     - Linux
     - Vim/NeoVim
 categories:
-    - Learning
-        - Computer
-            - Vim/NeoVim
+    - [Learning, Computer, Vim/NeoVim]
 ---
 
 Personal arrangement of [UltiSnips](https://github.com/SirVer/ultisnips)' official documentation.

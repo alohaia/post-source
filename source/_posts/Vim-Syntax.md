@@ -6,9 +6,7 @@ date: 2021-03-16 16:56:12
 tags:
     - Vim/NeoVim
 categories:
-    - Learning
-        - Computer
-            - Vim/NeoVim
+    - [Learning, Computer, Vim/NeoVim]
 ---
 
 > 写 [NeoVim 插件](https://github.com/alohaia/vim-hexowiki)过程中，对 Vim 语法高亮的一些总结。

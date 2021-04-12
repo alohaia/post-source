@@ -6,8 +6,7 @@ date: 2021-04-06 21:49:19
 tags:
     - Linux
 categories:
-    - Learning
-        - Computer
+    - [Learning, Computer, uncategorized]
 ---
 
 记录 Linux 使用过程中遇到的坑、软件和开发环境的安装和配置等。

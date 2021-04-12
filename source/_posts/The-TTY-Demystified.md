@@ -7,8 +7,7 @@ tags:
     - Linux
     - TTY
 categories:
-    - Learning
-        - Computer
+    - [Learning, Computer, uncategorized]
 ---
 
 原文：http://www.linusakesson.net/programming/tty/

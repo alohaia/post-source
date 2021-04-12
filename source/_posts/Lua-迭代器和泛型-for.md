@@ -6,9 +6,7 @@ date: 2021-04-08 10:57:34
 tags:
     - Lua
 categories:
-    - Learning
-        - Computer
-            - Lua
+    - [Learning, Computer, Lua]
 ---
 
 > 《Lua 程序设计》的“迭代器”和“工厂”（返回迭代器及其他值的函数）经常混用。
