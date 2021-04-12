@@ -57,7 +57,7 @@ Line discipline
 
 Line discipline 还包含用于字符回显（character echoing）以及回车（carriage return）和换行（linefeed）之间自动转换的选项。如果愿意，可以将其视为原始的内核级 `sed(1)`（Stream EDitor)
 
-另外，内核提供了数种不同的 line discipline，一次只能将其中之一连接到指定串行设备。默认的 line discipline 提供了 line editing，被称为 **N_TTY**（[[https://github.com/torvalds/linux/blob/master/drivers/tty/n_tty.c|driver/tty/n_tty.c]]）。其他则被用于别的目的，如管理分组交换数据（packet switched data）（ppp，IrDA，serial mice）。
+另外，内核提供了数种不同的 line discipline，一次只能将其中之一连接到指定串行设备。默认的 line discipline 提供了 line editing，被称为 **N_TTY**（[https://github.com/torvalds/linux/blob/master/drivers/tty/n_tty.c](driver/tty/n_tty.c)）。其他则被用于别的目的，如管理分组交换数据（packet switched data）（ppp，IrDA，serial mice）。
 
 高级应用程序（如 Vim）可以通过将线路规则置于 raw mode 而不是默认的 cooked (or canonical) mode 来禁用这些功能。
 

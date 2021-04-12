@@ -81,8 +81,8 @@ nvme0n1
 **文件系统格式推荐**
 
 - btrfs：Fedora 的默认 文件系统，支持 copy-on-write（COW），被认为是 Linux 的下一代文件系统，参考
-    - 知乎-如何看待 Fedora 33 将默认使用 btrfs 文件系统？-@醉卧沙场的回答
-    - Fedora Wiki-Btrfs by Default
+    - [知乎-如何看待 Fedora 33 将默认使用 btrfs 文件系统？-@醉卧沙场的回答](https://www.zhihu.com/question/407386653/answer/1354964606)
+    - [Fedora Wiki-Btrfs by Default](https://fedoraproject.org/wiki/Changes/BtrfsByDefault)
 - xfs：RHEL（Red Hat Enterprise Linux）7 和 8 等著名的商用发行版默认采用的文件系统，我在使用的就是 xfs，主要以因为可以使用 `xfsdump` 方便备份
 
 **使用 `xfsdump` 自动备份的脚本**
