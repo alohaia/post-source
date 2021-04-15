@@ -8,6 +8,7 @@ tags:
     - TTY
 categories:
     - [Learning, Computer, uncategorized]
+    - [Projects, Programming, 自制伪终端]
 ---
 
 原文：http://www.linusakesson.net/programming/tty/
@@ -57,7 +58,7 @@ Line discipline
 
 Line discipline 还包含用于字符回显（character echoing）以及回车（carriage return）和换行（linefeed）之间自动转换的选项。如果愿意，可以将其视为原始的内核级 `sed(1)`（Stream EDitor)
 
-另外，内核提供了数种不同的 line discipline，一次只能将其中之一连接到指定串行设备。默认的 line discipline 提供了 line editing，被称为 **N_TTY**（[https://github.com/torvalds/linux/blob/master/drivers/tty/n_tty.c](driver/tty/n_tty.c)）。其他则被用于别的目的，如管理分组交换数据（packet switched data）（ppp，IrDA，serial mice）。
+另外，内核提供了数种不同的 line discipline，一次只能将其中之一连接到指定串行设备。默认的 line discipline 提供了 line editing，被称为 **N_TTY**（[driver/tty/n_tty.c](https://github.com/torvalds/linux/blob/master/drivers/tty/n_tty.c)）。其他则被用于别的目的，如管理分组交换数据（packet switched data）（ppp，IrDA，serial mice）。
 
 高级应用程序（如 Vim）可以通过将线路规则置于 raw mode 而不是默认的 cooked (or canonical) mode 来禁用这些功能。
 
@@ -125,12 +126,12 @@ F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
 
 其中的“wait” wait queue 对应 system call `wait(2)`，一旦这些进程的一个子进程的状态改变了，它们就会被移到运行状态。有两种休眠状态：Interruptible sleep 和 uninterruptible sleep。前者（最常见的情况）意味着，即使进程是 wait queue 的一部分，当有信号被发送给它时，它也可能会被移到运行状态。如果你去查看内核源码，你会发现，任何等待事件的代码都必须在`schedule()` 返回后检查信号是否处于 _pending_ 状态，如果是，则中止 system call 。
 
-> `man 2 wait`: All of these system calls are used to wait for state changes in a child of the calling process, and obtain information about the child whose state has changed. A state  change  is considered to be: the child terminated; the child was stopped by a signal; or the child was resumed by a signal.In the case of a terminated child, performing a wait allows the system to release the resources associated with the child; if a wait is not performed, then the terminated child remains in a "zombie" state.
+> `man 2 wait`: All of these system calls are used to wait for state changes in a child of the calling process, and obtain information about the child whose state has changed. A state  change  is considered to be: the child terminated; the child was stopped by a signal; or the child was resumed by a signal. In the case of a terminated child, performing a wait allows the system to release the resources associated with the child; if a wait is not performed, then the terminated child remains in a "zombie" state.
 
 在上面的 `ps` 的显示结果中， `STAT` 列显示了每个进程现在的状态。一列中可能包含一个或多个属性或标志。
 
-- `S`: 进程是一个 [[#Jobs and Sessions#session leader|session leader]]。
-- `+`: 进程属于一个前台进程组（foreground process group)。
+- `S`: 进程是一个 [session leader](#session-leader)
+- `+`: 进程属于一个前台进程组（foreground process group)
 
 ## Jobs and Sessions
 
