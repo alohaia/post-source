@@ -29,7 +29,7 @@
 
 "ajv@^6.12.3":
   "integrity" "sha1-uvWmLoArB9l3A0WG+MO69a3ybfQ="
-  "resolved" "https://registry.npm.taobao.org/ajv/download/ajv-6.12.6.tgz"
+  "resolved" "https://registry.npm.taobao.org/ajv/download/ajv-6.12.6.tgz?cache=0&sync_timestamp=1618160257624&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-6.12.6.tgz"
   "version" "6.12.6"
   dependencies:
     "fast-deep-equal" "^3.1.1"
@@ -262,13 +262,6 @@
   "integrity" "sha1-dfUC7q+f/eQvyYgpZFvk6na9ni0="
   "resolved" "https://registry.npm.taobao.org/binary-extensions/download/binary-extensions-2.2.0.tgz"
   "version" "2.2.0"
-
-"bindings@^1.5.0":
-  "integrity" "sha1-EDU8npRTNLwFEabZCzj7x8nFBN8="
-  "resolved" "https://registry.npm.taobao.org/bindings/download/bindings-1.5.0.tgz"
-  "version" "1.5.0"
-  dependencies:
-    "file-uri-to-path" "1.0.0"
 
 "bl@~0.9.0":
   "integrity" "sha1-wGt5evCF6gC8Unr8jvzxHeIjIFQ="
@@ -964,11 +957,6 @@
   "resolved" "https://registry.npm.taobao.org/fast-json-stable-stringify/download/fast-json-stable-stringify-2.1.0.tgz"
   "version" "2.1.0"
 
-"file-uri-to-path@1.0.0":
-  "integrity" "sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90="
-  "resolved" "https://registry.npm.taobao.org/file-uri-to-path/download/file-uri-to-path-1.0.0.tgz"
-  "version" "1.0.0"
-
 "filename-regex@^2.0.0":
   "integrity" "sha1-wcS5vuPglyXdsQa3XB4wH+LxiyY="
   "resolved" "https://registry.npm.taobao.org/filename-regex/download/filename-regex-2.0.1.tgz"
@@ -1071,19 +1059,6 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
-
-"fsevents@^1.0.0":
-  "integrity" "sha1-8yXLBFVZJCi88Rs4M3DvcOO/zDg="
-  "resolved" "https://registry.npm.taobao.org/fsevents/download/fsevents-1.2.13.tgz?cache=0&sync_timestamp=1612536422255&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffsevents%2Fdownload%2Ffsevents-1.2.13.tgz"
-  "version" "1.2.13"
-  dependencies:
-    "bindings" "^1.5.0"
-    "nan" "^2.12.1"
-
-"fsevents@~2.3.1":
-  "integrity" "sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro="
-  "resolved" "https://registry.npm.taobao.org/fsevents/download/fsevents-2.3.2.tgz?cache=0&sync_timestamp=1612536422255&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffsevents%2Fdownload%2Ffsevents-2.3.2.tgz"
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0="
@@ -1274,13 +1249,6 @@
     "hoek" "0.9.x"
     "sntp" "0.2.x"
 
-"hexo-admonition@^1.1.2":
-  "integrity" "sha1-55QM0SK1QTHjGnl+vSm+3U5A+lE="
-  "resolved" "https://registry.npm.taobao.org/hexo-admonition/download/hexo-admonition-1.1.2.tgz"
-  "version" "1.1.2"
-  dependencies:
-    "markdown-it" "^9.1.0"
-
 "hexo-cli@^4.0.0":
   "integrity" "sha1-dGR7xyqQuc6/BK9bxwg5qygaMF0="
   "resolved" "https://registry.npm.taobao.org/hexo-cli/download/hexo-cli-4.2.0.tgz"
@@ -1402,6 +1370,12 @@
   "version" "2.0.0"
   dependencies:
     "chalk" "^4.0.0"
+
+"hexo-next-utteranc@github:theme-next/hexo-next-utteranc":
+  "resolved" "git+ssh://git@github.com/theme-next/hexo-next-utteranc.git#f592272a73cb47923f25443709786942f0398a69"
+  "version" "1.0.0"
+  dependencies:
+    "next-util" "^1.0.0"
 
 "hexo-pagination@1.0.0":
   "integrity" "sha1-ycDKNmUme56dCon8PtyvMnaQfcE="
@@ -1850,7 +1824,7 @@
 
 "js-yaml@^3.13.1":
   "integrity" "sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc="
-  "resolved" "https://registry.npm.taobao.org/js-yaml/download/js-yaml-3.14.1.tgz?cache=0&sync_timestamp=1609680305748&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjs-yaml%2Fdownload%2Fjs-yaml-3.14.1.tgz"
+  "resolved" "https://registry.npm.taobao.org/js-yaml/download/js-yaml-3.14.1.tgz?cache=0&sync_timestamp=1618435151523&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjs-yaml%2Fdownload%2Fjs-yaml-3.14.1.tgz"
   "version" "3.14.1"
   dependencies:
     "argparse" "^1.0.7"
@@ -1985,6 +1959,11 @@
   "resolved" "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz"
   "version" "4.17.21"
 
+"lodash@^4.17.15":
+  "integrity" "sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw="
+  "resolved" "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz"
+  "version" "4.17.21"
+
 "log-util@^1.2.0":
   "integrity" "sha1-H2XbHzYEGPrUsebKFsCww5r+w6c="
   "resolved" "https://registry.npm.taobao.org/log-util/download/log-util-1.2.0.tgz"
@@ -2078,17 +2057,6 @@
     "mdurl" "^1.0.1"
     "uc.micro" "^1.0.5"
 
-"markdown-it@^9.1.0":
-  "integrity" "sha1-35YBwWhWhwTVVLH/+a8MW1YRaNk="
-  "resolved" "https://registry.npm.taobao.org/markdown-it/download/markdown-it-9.1.0.tgz"
-  "version" "9.1.0"
-  dependencies:
-    "argparse" "^1.0.7"
-    "entities" "~1.1.1"
-    "linkify-it" "^2.0.0"
-    "mdurl" "^1.0.1"
-    "uc.micro" "^1.0.5"
-
 "math-random@^1.0.1":
   "integrity" "sha1-XdaUPJOFSCZwFtTjTwV1gwgMUUw="
   "resolved" "https://registry.npm.taobao.org/math-random/download/math-random-1.0.4.tgz"
@@ -2111,7 +2079,7 @@
 
 "micromatch@^2.1.5":
   "integrity" "sha1-hmd8l9FyCzY0MdBNDRUpO9OMFWU="
-  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-2.3.11.tgz?cache=0&sync_timestamp=1617993541017&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-2.3.11.tgz"
+  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-2.3.11.tgz?cache=0&sync_timestamp=1618054787196&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-2.3.11.tgz"
   "version" "2.3.11"
   dependencies:
     "arr-diff" "^2.0.0"
@@ -2130,7 +2098,7 @@
 
 "micromatch@^3.1.10":
   "integrity" "sha1-cIWbyVyYQJUvNZoGij/En57PrCM="
-  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-3.1.10.tgz?cache=0&sync_timestamp=1617993541017&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-3.1.10.tgz"
+  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-3.1.10.tgz?cache=0&sync_timestamp=1618054787196&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-3.1.10.tgz"
   "version" "3.1.10"
   dependencies:
     "arr-diff" "^4.0.0"
@@ -2148,12 +2116,12 @@
     "to-regex" "^3.0.2"
 
 "micromatch@^4.0.2":
-  "integrity" "sha1-/a2DUr8MvribORtdJEvCL/PdTsg="
-  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-4.0.3.tgz?cache=0&sync_timestamp=1617993541017&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-4.0.3.tgz"
-  "version" "4.0.3"
+  "integrity" "sha1-iW1Rnf6dsl/OlM63pQCRm/iB6/k="
+  "resolved" "https://registry.npm.taobao.org/micromatch/download/micromatch-4.0.4.tgz?cache=0&sync_timestamp=1618054787196&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmicromatch%2Fdownload%2Fmicromatch-4.0.4.tgz"
+  "version" "4.0.4"
   dependencies:
     "braces" "^3.0.1"
-    "picomatch" "^2.2.1"
+    "picomatch" "^2.2.3"
 
 "mime-db@>= 1.43.0 < 2", "mime-db@1.47.0":
   "integrity" "sha1-jLMT5Zll08Bc+/iYkVomevRqM1w="
@@ -2264,11 +2232,6 @@
   "resolved" "https://registry.npm.taobao.org/ms/download/ms-2.1.1.tgz?cache=0&sync_timestamp=1607433856030&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fms%2Fdownload%2Fms-2.1.1.tgz"
   "version" "2.1.1"
 
-"nan@^2.12.1":
-  "integrity" "sha1-9TdkAGlRaPTMaUrJOT0MlYXu6hk="
-  "resolved" "https://registry.npm.taobao.org/nan/download/nan-2.14.2.tgz?cache=0&sync_timestamp=1602591700047&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnan%2Fdownload%2Fnan-2.14.2.tgz"
-  "version" "2.14.2"
-
 "nanomatch@^1.2.9":
   "integrity" "sha1-uHqKpPwN6P5r6IiVs4mD/yZb0Rk="
   "resolved" "https://registry.npm.taobao.org/nanomatch/download/nanomatch-1.2.13.tgz"
@@ -2290,6 +2253,13 @@
   "integrity" "sha1-/qz3zPUlp3rpY0Q2pkiD/+yjRvs="
   "resolved" "https://registry.npm.taobao.org/negotiator/download/negotiator-0.6.2.tgz"
   "version" "0.6.2"
+
+"next-util@^1.0.0", "next-util@github:theme-next/next-util":
+  "resolved" "git+ssh://git@github.com/theme-next/next-util.git#1385e49864df0dc406805a1ee76b517de0f61320"
+  "version" "1.0.0"
+  dependencies:
+    "js-yaml" "^3.13.1"
+    "lodash" "^4.17.15"
 
 "nib@^1.1.2":
   "integrity" "sha1-amnt5AgblcDe+L4CSkyK4MLLtsc="
@@ -2472,10 +2442,10 @@
   "resolved" "https://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz"
   "version" "2.1.0"
 
-"picomatch@^2.0.4", "picomatch@^2.2.1":
-  "integrity" "sha1-IfMz6ba46v8CRo9RRupAbTRfTa0="
-  "resolved" "https://registry.npm.taobao.org/picomatch/download/picomatch-2.2.2.tgz"
-  "version" "2.2.2"
+"picomatch@^2.0.4", "picomatch@^2.2.1", "picomatch@^2.2.3":
+  "integrity" "sha1-RlVH81nMwgbTxI5Goby4m/fuYZ0="
+  "resolved" "https://registry.npm.taobao.org/picomatch/download/picomatch-2.2.3.tgz"
+  "version" "2.2.3"
 
 "posix-character-classes@^0.1.0":
   "integrity" "sha1-AerA/jta9xoqbAL+q7jB/vfgDqs="
