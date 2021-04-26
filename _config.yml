@@ -155,6 +155,34 @@ markdown_it_plus:
                 ulClass: task-list
                 liClass: task-list-item
 
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+# markdown:
+#     render:
+#         html: true
+#         xhtmlOut: false
+#         breaks: true
+#         linkify: true
+#         typographer: true
+#         quotes: '“”‘’'
+#     enable_rules:
+#     disable_rules:
+#     plugins:
+#         - markdown-it-abbr
+#         - markdown-it-footnote
+#         - markdown-it-ins
+#         - markdown-it-sub
+#         - markdown-it-sup
+#     anchors:
+#         level: 2
+#         collisionSuffix: 'v'
+#         permalink: true
+#         permalinkClass: 'header-anchor'
+#         permalinkSide: 'left'
+#         permalinkSymbol: '¶'
+#         case: 0
+#         separator: ''
+
 # RSS
 feed:
     enable: true

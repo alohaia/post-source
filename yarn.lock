@@ -1404,9 +1404,8 @@
   dependencies:
     "ejs" "^2.6.1"
 
-"hexo-renderer-markdown-it-plus@^1.0.4":
-  "integrity" "sha1-sJYudbr6SUCt6cHXqX3+UN0DQGY="
-  "resolved" "https://registry.npm.taobao.org/hexo-renderer-markdown-it-plus/download/hexo-renderer-markdown-it-plus-1.0.4.tgz"
+"hexo-renderer-markdown-it-plus@github:alohaia/hexo-renderer-markdown-it-plus":
+  "resolved" "git+ssh://git@github.com/alohaia/hexo-renderer-markdown-it-plus.git#f2dd1b25738992efc391ba9da398a9c6a7efb105"
   "version" "1.0.4"
   dependencies:
     "@iktakahiro/markdown-it-katex" "^3.0.3"
@@ -1496,7 +1495,7 @@
 
 "highlight.js@^9.12.0":
   "integrity" "sha1-0Yo1mGfzeME41oGe38KorNXymCU="
-  "resolved" "https://registry.npm.taobao.org/highlight.js/download/highlight.js-9.18.5.tgz"
+  "resolved" "https://registry.nlark.com/highlight.js/download/highlight.js-9.18.5.tgz"
   "version" "9.18.5"
 
 "hoek@0.9.x":
@@ -1899,7 +1898,7 @@
 
 "katex@^0.10.0":
   "integrity" "sha1-OZc+27Ze2ltvnn9BZIeB5VfdSTI="
-  "resolved" "https://registry.npm.taobao.org/katex/download/katex-0.10.2.tgz"
+  "resolved" "https://registry.nlark.com/katex/download/katex-0.10.2.tgz"
   "version" "0.10.2"
   dependencies:
     "commander" "^2.19.0"
@@ -2048,7 +2047,7 @@
 
 "markdown-it@^8.3.1":
   "integrity" "sha1-OG+YmY3BWjdyKqdyIIT0Agvdm1Q="
-  "resolved" "https://registry.npm.taobao.org/markdown-it/download/markdown-it-8.4.2.tgz"
+  "resolved" "https://registry.npm.taobao.org/markdown-it/download/markdown-it-8.4.2.tgz?cache=0&sync_timestamp=1618575179015&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmarkdown-it%2Fdownload%2Fmarkdown-it-8.4.2.tgz"
   "version" "8.4.2"
   dependencies:
     "argparse" "^1.0.7"

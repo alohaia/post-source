@@ -197,16 +197,93 @@ void* l_alloc(void* ud, void* ptr, size_t osize, size_t nsize) {
 }
 ```
 
-## 常用函数
+## 在 Lua 中调用 C 语言
 
-`lua_State *luaL_newstate (void);`
-: 创建一个新的 **Lua 状态机**。新环境中没有任何预定义的函数。
+Lua 调用 C 函数时，每个 C 函数痘有其独立的**局部栈**，其第一个参数总是位于局部栈中索引为 1 的位置。
 
-`void luaL_openlibs (lua_State *L);`
-: 加载所有 Lua 标准库。
+创建一个 C 库一般包含三步：
+1. 创建 C 函数
+2. 填充函数注册表：定义 C 函数到 Lua 函数的映射
+3. 定义入口函数：将 C 函数注册为 Lua 函数
 
-`int luaL_loadstring (lua_State *L, const char *s);`
-: 将一个字符串加载为 Lua 代码块。 这个函数使用 `lua_load` 加载一个零结尾的字符串 `s`。
+首先，库函数都必须使用同一个原型：
+
+```cpp
+typedef int (*lua_CFunction)(lua_State *L);
+```
+
+C 函数通过返回值（`return`）决定要返回（通过虚拟栈）给 Lua 的参数个数。
+
+第二步中，函数注册表为一个 `luaL_Reg` 数组，如：
+
+```c
+static const struct luaL_Reg _lib_reg[] = {
+    {"dir", l_dir},
+    {NULL, NULL} // 哨兵
+};
+```
+
+其中，`l_dir` 函数被注册为 Lua 函数 `dir`。
+
+最后就是使用第二步中的函数注册表将 C 函数注册为 Lua 函数。这一步需要我们定义一个**入口函数**。
+Lua 会根据库文件名在库文件中寻找入口函数，一般为 `luaopen_<file_name_without_extention_name>`，如：
+
+```c
+int luaopen_libdir(lua_State *L) {
+    luaL_newlib(L, _lib_reg);
+    return 1;
+}
+```
+
+入口函数通常直接使用 `luaL_newlib` 方法创建新的 Lua 表，其中包含注册好的 Lua 函数。
+
+```c
+void luaL_newlib(lua_State *L, const luaL_Reg l[]);
+```
+
+`luaL_newlib` 其实是一个宏，详见[共享上值](#共享上值)。
+
+完整示例见[实现 Lua 的 dir 函数](#实现-lua-的-dir-函数)。
+
+{% note info "require 函数参数中的连字符" %}
+Lua 的 `require` 函数在寻找入口函数时，入口函数名为库文件第一个连字符（-）之前的部分或文件名去处末尾的 `.so`（Windows 为 `.dll`）。
+
+另外，`require` 函数中的句点 `.` 表示**子模块**，如：`require'libdir-v0.1'` 中的 `libdir-v0.1` 表示 `libdir-v0/1`：
+
+```xxx
+> dir = require'libdir-v0.1'
+stdin:1: module 'libdir-v0.1' not found:
+        no field package.preload['libdir-v0.1']
+        no file '/usr/share/lua/5.4/libdir-v0/1.lua'
+        no file '/usr/share/lua/5.4/libdir-v0/1/init.lua'
+        no file '/usr/lib/lua/5.4/libdir-v0/1.lua'
+        no file '/usr/lib/lua/5.4/libdir-v0/1/init.lua'
+        no file './libdir-v0/1.lua'
+        no file './libdir-v0/1/init.lua'
+        no file '/usr/lib/lua/5.4/libdir-v0/1.so'
+        no file '/usr/lib/lua/5.4/loadall.so'
+        no file './libdir-v0/1.so'
+        no file '/usr/lib/lua/5.4/libdir-v0.so'
+        no file '/usr/lib/lua/5.4/loadall.so'
+        no file './libdir-v0.so'
+stack traceback:
+        [C]: in function 'require'
+        stdin:1: in main chunk
+        [C]: in ?
+```
+{% endnote %}
+
+### 注册表
+
+Lua API 中通过使用注册表来实现“全局变量”。使用这一功能需要三个函数：
+
+```c
+int luaL_ref (lua_State *L, int t);
+void luaL_unref (lua_State *L, int t, int ref);
+
+int lua_rawgeti (lua_State *L, int index, lua_Integer n);
+```
+
 
 ## 实例
 
@@ -240,5 +317,63 @@ static void stackDump (lua_State* L) {
     }
     printf("\n");
 }
+```
+
+### 实现 Lua 的 dir 函数
+
+Lua 标准库中没有 `dir` 函数（读取目录下的所有文件），但是我们可以自己实现：
+
+```c libdir-v0.1.so
+#include <dirent.h>
+#include <errno.h>
+#include <string.h>
+
+#include <lua.h>
+#include <lauxlib.h>
+
+static int l_dir(lua_State *L) {
+    DIR *dir;
+    struct dirent *entry;
+    int i;
+    const char *path = luaL_checkstring(L, 1);
+
+    // 打开目录
+    dir = opendir(path);
+    if (dir == NULL) {
+        lua_pushnil(L);
+        lua_pushstring(L, strerror(errno));
+        return 2;
+    }
+
+    lua_newtable(L);
+    i = 1;
+    while ((entry = readdir(dir)) != NULL) {
+        lua_pushinteger(L, i++);
+        lua_pushstring(L, entry->d_name);
+        lua_settable(L, -3);
+    }
+
+    closedir(dir);
+    return 1;
+}
+
+static const struct luaL_Reg _lib_reg[] = {
+    {"dir", l_dir},
+    {NULL, NULL} // 哨兵
+};
+
+// 入口函数，不加 static，lua_open<libname>
+int luaopen_libdir(lua_State *L) {
+    luaL_newlib(L, _lib_reg);
+    return 1;
+}
+```
+
+通过 `gcc -fPIC -shared -o libdir-v0.1.so libdir-v0.1.c` 编译得到动态库。
+再通过以下 Lua 脚本测试：
+
+```lua
+dir = require"libdir"   --> 
+dir.dir('.')  --> table: 0x5580923c1af0
 ```
 
