@@ -288,3 +288,27 @@ What's this?
 {% asset_img slug [title] %}
 {% asset_link slug [title] %}
 ```
+{% note default default %}
+default
+{% endnote %}
+
+{% note primary primary %}
+primary
+{% endnote %}
+
+{% note success success %}
+success
+{% endnote %}
+
+{% note info info %}
+info
+{% endnote %}
+
+{% note warning warning %}
+warning
+{% endnote %}
+
+{% note danger danger %}
+danger
+{% endnote %}
+

@@ -199,3 +199,33 @@ feed:
     icon: icon.png
     content_limit:
     content_limit_delim: ' '
+
+# hexo-admin authentification
+## https://github.com/jaredly/hexo-admin
+admin:
+  username: alohaia
+  password_hash: $2a$10$L7vbpRdMXv3ZhiFQfIqbr.CJYhsv2A/AtxlnXUoxYcLKU6fWvsC4a
+  secret: my super secret phrase
+
+# # live-2d
+# # Live2D
+# ## https://github.com/EYHN/hexo-helper-live2d
+# live2d:
+#   enable: true
+#   # enable: false
+#   scriptFrom: local # 默认
+#   pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
+#   pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
+#   pluginModelPath: assets/ # 模型文件相对与插件根目录路径
+#   # scriptFrom: jsdelivr # jsdelivr CDN
+#   # scriptFrom: unpkg # unpkg CDN
+#   # scriptFrom: https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url
+#   tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
+#   debug: false # 调试, 是否在控制台输出日志
+#   model:
+#     # use: live2d-widget-model-haru # npm-module package name
+#     use: ./node_modules/live2d-widget-model-haru/01 # npm-module package name
+#     # use: wanko # 博客根目录/live2d_models/ 下的目录名
+#     # use: ./wives/wanko # 相对于博客根目录的路径
+#     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
+
