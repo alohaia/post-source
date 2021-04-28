@@ -43,7 +43,7 @@ Lua 通过维护一个虚拟栈来完成 Lua 代码和 C 代码之间的交流�
 : 除非特别说明，API 中的函数能正确处理可接受索引。
 
 伪索引（pseudo-indices）
-: 对应一些不在栈中但是可以被 C 代码访问的位置。
+: 即 `LUAREGISTRYINDEX`，对应一些不在栈中但是可以被 C 代码访问的位置。
 : 可以用来访问**注册表**（registry）和 C 函数的**上值**（upvalue）。
 
 Lua 代码严格按照后进先出的规则操纵栈，而 C 代码则可以对栈进行随机访问，甚至可以在任何位置插入和删除元素。
@@ -53,7 +53,7 @@ C 代码通过 `lua_push*` 函数将元素压入栈，通过 `lua_to*` 函数取
 对于数字（Number 和 Integer），返回值 0 有意义，不能视为错误。
 Lua5.2 中引入了新函数进行处理：
 
-```cpp
+```c
 lua_Number lua_tonumberx (lua_State *L, int index, int *isnum);
 lua_Integer lua_tointegerx (lua_State *L, int index, int *isnum);
 ```
@@ -61,7 +61,7 @@ lua_Integer lua_tointegerx (lua_State *L, int index, int *isnum);
 当获得的值为 0 或指定的值类型不对时，两个函数都会返回 0。
 `isnum` 返回一个布尔值表示指定的值的类型是否为所需类型，以区分上述两种情况。
 
-```cpp
+```c
 lua_pushstring(L, "hello");
 
 int msg;
@@ -71,7 +71,7 @@ if(!lua_tonumberx(L, -1, &msg)) {
 }
 ```
 
-```cpp
+```c
 lua_pushinteger(L, 0)
 
 int msg;
@@ -85,7 +85,7 @@ if(!lua_tonumberx(L, -1, &msg)) {
 {% note warning 确保栈中有足够的空间 %}
 Lua 保证在使用栈时栈中至少有 20 个空闲的位置（slot）（`lua.h` 中定义的单位大小为 `LUA_MINSTACK`），但有些时候会需要更多的空间，这时便需要 `lua_checkstack` 函数：
 
-```cpp
+```c
 int lua_checkstack(lua_State *L, int sz);
 ```
 
@@ -94,7 +94,7 @@ int lua_checkstack(lua_State *L, int sz);
 
 辅助库 `lauxlib.h` 中定义了一个高层函数：
 
-```cpp
+```c
 void luaL_checkstack(lua_Stack *L, int sz, const char *msg);
 ```
 
@@ -104,7 +104,7 @@ void luaL_checkstack(lua_Stack *L, int sz, const char *msg);
 
 其他栈操作（详细说明见[手册](#)）：
 
-```cpp
+```c
 int  lua_gettop    (lua_State *L);
 void lua_settop    (lua_State *L, int index);
 void lua_pushvalue (lua_State *L, int index);
@@ -128,7 +128,7 @@ void lua_copy      (lua_State *L, int fromidx, int toidx);
 要正确处理应用代码中的错误，必须通过 Lua 提供的 API 调用我们自己的代码，即在 `setjmp` 的上下文中运行代码。
 我们可以将 C 代码封装到一个 C 函数中，再通过 `lua_pcall` 调用，这样我们的 C 代码会在**保护模式**（见 [`lua_pcall`](https://www.runoob.com/manual/lua53doc/manual.html#lua_pcall)）下运行。
 
-```cpp
+```c
 static int foo(lua_State *L) {
     // code to run in protected mode
     return 0;
@@ -152,7 +152,7 @@ Lua 的 C API 并不一定要通过调用 `malloc` 等函数来分配内存，�
 `luaL_newstate` 通过默认分配函数来创建 Lua 状态机，该分配函数使用了 C 的 `malloc`、`realloc`、`free` 函数。
 `lua_newstate` 则将其参数作为分配函数创建 Lua 状态机。
 
-```cpp
+```c
 lua_State* lua_newstate(lua_Alloc f, void* ud);
 ```
 
@@ -161,7 +161,7 @@ lua_State* lua_newstate(lua_Alloc f, void* ud);
 
 分配函数需满足以下格式：
 
-```cpp
+```c
 typedef void* (*lua_Alloc)(void* ud,
                            void* ptr,
                            size_t osize,
@@ -185,7 +185,7 @@ typedef void* (*lua_Alloc)(void* ud,
 
 `luaL_newstate` 使用的默认分配函数如下：
 
-```cpp
+```c
 void* l_alloc(void* ud, void* ptr, size_t osize, size_t nsize) {
     (void) ud; (void)osize; /* 未使用 */
     if(nsize == 0) {
@@ -208,7 +208,7 @@ Lua 调用 C 函数时，每个 C 函数痘有其独立的**局部栈**，其第
 
 首先，库函数都必须使用同一个原型：
 
-```cpp
+```c
 typedef int (*lua_CFunction)(lua_State *L);
 ```
 
@@ -275,21 +275,91 @@ stack traceback:
 
 ### 注册表
 
-Lua API 中通过使用注册表来实现“全局变量”。使用这一功能需要三个函数：
+Lua API 中通过使用注册表来实现“全局变量”。使用这一功能需要一对函数：
 
 ```c
 int luaL_ref (lua_State *L, int t);
 void luaL_unref (lua_State *L, int t, int ref);
-
-int lua_rawgeti (lua_State *L, int index, lua_Integer n);
 ```
 
+注册表总是位于**伪索引** `LUA_REGISTRYINDEX` 中，可以像使用一个普通的索引一样使用它。
+需要注意的是，所有在 Lua 中加载的库代码都共用一个注册表，在给表的键取名时要注意命名冲突。
+
+{% note warning %}
+在注册表中不能使用数值类型的键，因为 Lua 将其作为**引用系统**的保留字。
+{% endnote %}
+
+
+{% note info 轻量用户数据 %}
+Lua 中提供轻量用户数据（light userdata）来获取唯一值。
+
+```c
+// 具有唯一地址的变量
+static char Key = 'k';
+
+// 保存字符串
+lua_pushlightuserdata(L, (void*)&Key);
+lua_pushstring(L, myStr);
+lua_settable(L, LUA_REGISTRYINDEX);
+
+// 获取字符串
+lua_pushlightuserdata(L, (void*)&Key);
+lua_gettable(L, LUA_REGISTRYINDEX);
+*myStr = lua_tostring(L, -1);
+```
+
+为了简化将变量地址作为唯一值的用法，Lua5.2 引入了两个函数：`lua_rawgetp` 和 `lua_rawsetp`。
+
+```c
+// 具有唯一地址的变量
+static char Key = 'k';
+
+// 保存字符串
+lua_pushstring(L, myStr);
+lua_rawsetp(L, LUA_REGISTRYINDEX, (void*)&Key);
+
+// 获取字符串
+lua_rawgetp(L, LUA_REGISTRYINDEX, (void*)&Key);
+myStr = lua_tostring(L, -1);
+```
+{% endnote %}
+
+### 上值和共享上值
+
+Lua 中可以为一个函数绑定若干个**上值**，这些上值仅在绑定的函数中可见。
+一个函数和其上值的关联称为**闭包**（closure）。
+
+```c
+// 创建并返回闭包
+void lua_pushcclosure(lua_State *L, lua_CFunction fn, int n);
+// 在闭包函数中获取上值的索引
+int lua_upvalueindex(int i);
+```
+
+上值的索引可以被当作普通索引使用，Lua 会处理好一切。
+
+使用 `lua_pushcclosure` 在工厂函数中返回一个闭包是上值的一种使用方法，实例见：[上值和工厂函数](#上值和工厂函数)。
+
+如果要在多个函数中共用上值（共享上值），可以使用以下代码替代 `luaL_newlib`。
+
+```c
+// 创建库函数表
+luaL_newlibtable(L, _lib_reg);
+
+// 准备要共享的值（这里是一个表）
+lua_newtable(L);
+/* ...（这里假设这些代码保证上面的表最终在栈顶） */
+
+// 将 _lib_reg 中的函数添加到新库中，指定栈顶一定数量（这里是 1）的共享上值
+// lua_setfuncs 会将栈中的值删除
+lua_setfuncs(L, lib, 1);
+```
 
 ## 实例
 
 ### 输出整个栈中的内容
 
-```cpp
+```c
 static void stackDump (lua_State* L) {
     int i;
     int top = lua_gettop(L);
@@ -323,7 +393,7 @@ static void stackDump (lua_State* L) {
 
 Lua 标准库中没有 `dir` 函数（读取目录下的所有文件），但是我们可以自己实现：
 
-```c libdir-v0.1.so
+```c libdir-v0-1.c
 #include <dirent.h>
 #include <errno.h>
 #include <string.h>
@@ -369,11 +439,31 @@ int luaopen_libdir(lua_State *L) {
 }
 ```
 
-通过 `gcc -fPIC -shared -o libdir-v0.1.so libdir-v0.1.c` 编译得到动态库。
+通过 `gcc -fPIC -shared -o libdir-v0-1.so libdir-v0-1.c` 编译得到动态库。
 再通过以下 Lua 脚本测试：
 
 ```lua
 dir = require"libdir"   --> 
 dir.dir('.')  --> table: 0x5580923c1af0
 ```
+### 上值和工厂函数
 
+```c
+// 前置声明
+static int counter(lua_State* L);
+
+// 工厂函数，返回（通过虚拟栈）一个 closure
+int newCounter(lua_State* L) {
+    lua_pushinteger(L, 10);
+    lua_pushcclosure(L, &counter, 1);   // 状态机，指定闭包中的函数，要绑定的上值数量
+    return 1;
+}
+
+// counter 的定义
+static int counter(lua_State* L) {
+    int val = lua_tointeger(L, lua_upvalueindex(1));
+    lua_pushinteger(L, ++val);
+    lua_copy(L, -1, lua_upvalueindex(1));
+    return 1;
+}
+```
