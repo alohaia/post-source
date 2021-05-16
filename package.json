@@ -5,15 +5,19 @@
     "scripts": {
         "build": "hexo generate",
         "clean": "hexo clean",
-        "deploy": "cp ./CNAME ./public && proxychains -q hexo deploy",
+        "deploy": "hexo deploy",
         "server": "hexo server"
     },
     "hexo": {
         "version": "5.4.0"
     },
     "dependencies": {
+        "bin-build": "^3.0.0",
+        "bin-wrapper": "^4.1.0",
+        "gifsicle": "github:imagemin/gifsicle-bin",
         "hexo": "^5.0.0",
         "hexo-admin": "^2.3.0",
+        "hexo-all-minifier": "^0.5.7",
         "hexo-deployer-git": "^3.0.0",
         "hexo-generator-archive": "^1.0.0",
         "hexo-generator-category": "^1.0.0",
@@ -25,10 +29,14 @@
         "hexo-next-utteranc": "github:theme-next/hexo-next-utteranc",
         "hexo-related-popular-posts": "^5.0.1",
         "hexo-renderer-ejs": "^1.0.0",
-        "hexo-renderer-markdown-it-plus": "github:alohaia/hexo-renderer-markdown-it-plus",
+        "hexo-renderer-markdown-it-plus": "github:CHENXCHEN/hexo-renderer-markdown-it-plus",
         "hexo-renderer-stylus": "^2.0.0",
         "hexo-server": "^2.0.0",
+        "jpegtran-bin": "^5.0.2",
+        "logalot": "^2.1.0",
         "markdown-it-task-checkbox": "^1.0.6",
-        "next-util": "github:theme-next/next-util"
+        "mozjpeg": "^7.0.0",
+        "next-util": "github:theme-next/next-util",
+        "optipng-bin": "^7.0.0"
     }
 }

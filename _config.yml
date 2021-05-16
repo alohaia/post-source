@@ -119,8 +119,8 @@ markdown_it_plus:
     highlight: true
     html: true
     xhtmlOut: true
-    breaks: true
-    langPrefix:
+    breaks: false
+    langPrefix: 'language-'
     linkify: true
     typographer:
     quotes: “”‘’
@@ -136,12 +136,12 @@ markdown_it_plus:
                 tocLastLevel: 6
                 tocCallback:
                 anchorLink: true
-                anchorLinkSymbol: ''
+                anchorLinkSymbol: '#'
                 anchorFirstLevel: 2
-                anchorLastLevel: 6
+                anchorLastLevel: 4
                 anchorLinkSpace: true
                 anchorLinkSymbolClassName:
-                anchorLinkBefore: true
+                anchorLinkBefore: false
                 anchorClassName: 'markdownIt-Anchor'
                 resetIds: true
         - plugin:   # https://github.com/linsir/markdown-it-task-checkbox
@@ -201,7 +201,7 @@ feed:
     content_limit_delim: ' '
 
 # hexo-admin authentification
-## https://github.com/jaredly/hexo-admin
+## https://github.com/jaredl/hexo-admin
 admin:
   username: alohaia
   password_hash: $2a$10$L7vbpRdMXv3ZhiFQfIqbr.CJYhsv2A/AtxlnXUoxYcLKU6fWvsC4a
@@ -209,7 +209,7 @@ admin:
 
 # # live-2d
 # # Live2D
-# ## https://github.com/EYHN/hexo-helper-live2d
+# ## https://github.com/EYHN/hexoahelper-live2d
 # live2d:
 #   enable: true
 #   # enable: false
@@ -229,3 +229,6 @@ admin:
 #     # use: ./wives/wanko # 相对于博客根目录的路径
 #     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
 
+# hexo-all-minifier
+## https://github.com/chenzhutian/hexo-all-minifier
+all_minifier: false

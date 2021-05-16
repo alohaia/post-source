@@ -1,10 +1,12 @@
 ---
 title: {{ title }}
 date: {{ date }}
-comments: false
+comments: true
 mathjax: false
 tags:
-    - Draft
 categories:
-    - Draft
 ---
+
+Empty...
+
+<!-- more -->
