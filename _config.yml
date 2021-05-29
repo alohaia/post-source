@@ -63,7 +63,7 @@ prismjs:
 index_generator:
   path: ''
   per_page: 10
-  order_by: -date
+  order_by: -updated
 
 # Category & Tag
 default_category: uncategorized
@@ -103,7 +103,8 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: "git"
-  repo: "git@github.com:alohaia/aloha.github.io"
+  repo: "git@github.com:alohaia/alohaia.github.io"
+  # repo: "https://github.com/daisilia/daisilia.github.io"
   branch: "main"
 
 # Search
@@ -232,3 +233,7 @@ admin:
 # hexo-all-minifier
 ## https://github.com/chenzhutian/hexo-all-minifier
 all_minifier: false
+
+exif:
+  enable: true
+  template: "{FileSource} {FocalLength}mm f/{FNumber} {ExposureTime}s"

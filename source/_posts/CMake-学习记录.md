@@ -146,7 +146,7 @@ target_include_directories(target
 
 #### 创建库
 
-使用 [`add_library()`](https://cmake.org/cmake/help/latest/command/add_library.html) 函数以用指定源文件创建一个库文件。
+<a href="{% post_path 使用 %}">使用</a> [`add_library()`](https://cmake.org/cmake/help/latest/command/add_library.html) 函数以用指定源文件创建一个库文件。
 
 如要创建静态库，可以像这样写：
 
