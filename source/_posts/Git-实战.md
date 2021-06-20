@@ -23,7 +23,7 @@ categories:
 git remote -v
 ```
 
-获取最新代码到本地（本地当前分支为 <branch>，获取的远端的分支为 <remote>/<branch>）：
+获取最新代码到本地（本地当前分支为 \<branch\>，获取的远端的分支为 \<remote\>/\<branch\>）：
 
 ```shell
 # 获取远端 origin 的 master 分支，保存为本地 origin/master 分支

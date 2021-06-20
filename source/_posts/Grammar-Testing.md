@@ -283,8 +283,10 @@ cout << "Hello world!" << endl;
 
 ### Image
 
-{% img image /resources/Grammar-Testing/20020955_p0.jpg 750 960 '"20020955_p0" "20020955_p0"' %}
+{% img right "/images/aloha.gif" 200 "aloha'aloha'" %}
 
+- `img.right`、`img.left` 会分别在右、左边浮动显示。
+- `img` 的高度不超过 `35em`。
 
 ### Pull Quote
 

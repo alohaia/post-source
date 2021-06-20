@@ -172,7 +172,8 @@ music:
   enable: true
   server: netease
   type: playlist
-  id: 2362969974
+  #id: 2362969974
+  id: 6805681357
   mini: false
   fixed: false
   list-folded: true
@@ -208,7 +209,7 @@ toc:
   # If true, all words will placed on next lines if header width longer then sidebar width.
   wrap: false
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
-  expand_all: false
+  expand_all: true
   # Maximum heading depth of generated toc.
   max_depth: 6
 
@@ -317,7 +318,7 @@ follow_me:
 # Related popular posts
 # Dependencies: https://github.com/tea3/hexo-related-popular-posts
 related_posts:
-  enable: true
+  enable: false
   title: # Custom header, leave empty to use the default one
   display_in_home: false
   params:
@@ -378,7 +379,7 @@ preconnect: true
 # Set the text alignment in posts / pages.
 text_align:
   # Available values: start | end | left | right | center | justify | justify-all | match-parent
-  desktop: justify
+  desktop: left
   mobile: left
 
 # Reduce padding / margin indents on devices with narrow width.
@@ -412,7 +413,7 @@ codeblock:
 back2top:
   enable: true
   # Back to top in sidebar.
-  sidebar: false
+  sidebar: true
   # Scroll percent label in b2t button.
   scrollpercent: true
 
@@ -456,10 +457,10 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host:
+  host: https://fonts.googleapis.com
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -469,30 +470,30 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Lato
+    family: Noto Sans SC
     size:
 
   # Font settings for site title (.site-title).
   title:
     external: true
-    family:
+    family: Noto Sans SC
     size:
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family:
+    family: Noto Serif
     size:
 
   # Font settings for posts (.post-body).
   posts:
     external: true
-    family:
+    family: Noto Sans SC
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: Fira Code
 
 
 # ---------------------------------------------------------------
@@ -502,7 +503,7 @@ font:
 
 # If true, site-subtitle will be added to index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
-index_with_subtitle: false
+index_with_subtitle: true
 
 # Automatically add external URL with Base64 encrypt & decrypt.
 exturl: true
@@ -617,18 +618,24 @@ comments:
   lazyload: true
   # Modify texts or order for any navs, here are some examples.
   nav:
-    # utterances:
-    #   text: Comment with utterances
-    #   order: -1
+    utterances:
+      text: Comment with utterances
+      order: 1
+    # disqusjs:
+    #   text: Comment with disqusjs
+    #   order: 2
+    # disqus:
+    #   text: Comment with disqus
+    #   order: 2
     # isso:
     #   text: Comment with isso
-    #   order: -2
+    #   order: 3
 
 # Disqus
 # For more information: https://disqus.com
 disqus:
   enable: false
-  shortname:
+  shortname: http-www-aloha-org-cn
   count: true
 
 # DisqusJS
@@ -674,10 +681,11 @@ gitalk:
 utterances:
   enable: true
   repo: alohaia/alohaia.github.io # Github repository name
+  # repo: daisilia/daisilia.github.io # Github repository name
   # Available values: pathname | url | title | og:title
   issue_term: title
   # Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light
-  theme: github-light
+  theme: preferred-color-scheme
 
 # Isso
 # For more information: https://posativ.org/isso/
@@ -743,7 +751,7 @@ leancloud_visitors:
 # Visit https://console.firebase.google.com/u/0/ to get apiKey and projectId.
 # Visit https://firebase.google.com/docs/firestore/ to get more information about firestore.
 firestore:
-  enable: true
+  enable: false
   collection: articles # Required, a string collection name to access firestore database
   apiKey: AIzaSyC7NHKKsudADkwkMhNPKROb1VmXMNfL5Pc # Required
   projectId: aloha-s-blog-7252f # Required

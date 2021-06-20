@@ -138,7 +138,7 @@ Details:
 
 ## Mirrors
 
-Mirrors repeat the content of a tabstop.To mirror a tabstop simply insert the tabstop again using the "dollar sign followed by a number" syntax, e.g., `\$1`.
+Mirrors repeat the content of a tabstop.To mirror a tabstop simply insert the tabstop again using the "dollar sign followed by a number" syntax, e.g., `$1`.
 
     snippet ifndef
     #ifndef ${1:SOME_DEFINE}
@@ -154,7 +154,7 @@ Mirrors repeat the content of a tabstop.To mirror a tabstop simply insert the ta
 ### Shellcode
 
 An example may be the most helpful.
-```
+```xxx
 snippet today
 Today is the `date +%d.%m.%y`.
 endsnippet
@@ -165,12 +165,12 @@ The output of command `date +%d.%m%y` will replace the text wrapped by backticks
 ### Vimscript
 
 Similar to shellcode, but begins with \`v.
-```
+```xxx
 snippet indent
 Indent is: `!v indent(".")`.
 endsnippet
 ```
-```
+```xxx
 (note the 4 spaces in front): indent<trigger_key> ->
 (note the 4 spaces in front): Indent is: 4.
 ```
@@ -187,7 +187,7 @@ There are two choices:
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | fn       | The current filename                                                                                                                                                               |
 | path     | The complete path to the current file                                                                                                                                              |
-| t        | The values of the placeholders, t\[1\] is the text of `${1},` etc.                                                                                                                  |
+| t        | The values of the placeholders, `t[1]` is the text of `${1}`, etc.                                                                                                                  |
 | snip     | UltiSnips.TextObjects.SnippetUtil object instance. Has methods that simplify indentation handling and owns the string that should be inserted for the snippet.                   |
 | context  | Result of context condition. See UltiSnips-custom-context-snippets.                                                                                                                |
 | match    | Only in regular expression triggered snippets.<br> This is the return value of the match of the regular expression.<br> See http://docs.python.org/library/re.html#match-objects |

@@ -115,15 +115,15 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 ```
 
+{% note warning %}
+这种方式已经不推荐，取而代之的是直接在 `add_xxx()` 函数中写明源文件。
+{% endnote %}
+
 也可以使用 `GOLB` 命令以用通配符寻找相符的文件：
 
 ```cmake
 file(GLOB SOURCES "src/*.cpp")
 ```
-
-{% note warning %}
-这种方式已经不推荐，取而代之的是直接在 `add_xxx()` 函数中写明源文件。
-{% endnote %}
 
 ### 包含目录
 

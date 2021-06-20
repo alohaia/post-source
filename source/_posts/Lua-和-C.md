@@ -246,7 +246,7 @@ void luaL_newlib(lua_State *L, const luaL_Reg l[]);
 完整示例见[实现 Lua 的 dir 函数](#实现-lua-的-dir-函数)。
 
 {% note info "require 函数参数中的连字符" %}
-Lua 的 `require` 函数在寻找入口函数时，入口函数名为库文件第一个连字符（-）之前的部分或文件名去处末尾的 `.so`（Windows 为 `.dll`）。
+Lua 的 `require` 函数在寻找入口函数时，入口函数名为库文件第一个连字符（-）之前的部分或文件名去除末尾的 `.so`（Windows 为 `.dll`）。
 
 另外，`require` 函数中的句点 `.` 表示**子模块**，如：`require'libdir-v0.1'` 中的 `libdir-v0.1` 表示 `libdir-v0/1`：
 
