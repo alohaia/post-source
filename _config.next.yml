@@ -165,15 +165,17 @@ rss:
   path: /atom.xml
   icon: fa fa-rss
 
-rainbow:
-  enable: true
+# rainbow | jinrishici
+quote:
+  enable: jinrishici
 
+##Doc: https://github.com/metowolf/MetingJS
 music:
   enable: true
   server: netease
   type: playlist
   #id: 2362969974
-  id: 6805681357
+  id: 6822976600
   mini: false
   fixed: false
   list-folded: true
@@ -788,7 +790,7 @@ local_search:
   # If manual, trigger search by pressing enter key or search button.
   trigger: auto
   # Show top n results per article, show all results by setting to -1
-  top_n_per_article: 1
+  top_n_per_article: -1
   # Unescape html strings to the readable one.
   unescape: false
   # Preload the search data when the page loads.

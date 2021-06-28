@@ -92,6 +92,7 @@ pagination_dir: page
 ## include:/exclude: options only apply to the 'source/' folder
 include:
 exclude:
+  - "CNAME"
 ignore:
 
 # Extensions
@@ -103,7 +104,7 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: "git"
-  repo: "git@github.com:alohaia/alohaia.github.io"
+  repo: "git@github.com:daisilia/daisilia.github.io.git"
   branch: "main"
 
 # Search

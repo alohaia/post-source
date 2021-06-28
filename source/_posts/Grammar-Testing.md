@@ -319,27 +319,27 @@ What's this?
 
 #### Call Out
 
-{% note default default %}
+{% note default default@default %}
 default
 {% endnote %}
 
-{% note primary primary %}
+{% note primary primary@primary %}
 primary
 {% endnote %}
 
-{% note success success %}
+{% note success success@success %}
 success
 {% endnote %}
 
-{% note info info %}
+{% note info info@info %}
 info
 {% endnote %}
 
-{% note warning warning %}
+{% note warning warning@warning %}
 warning
 {% endnote %}
 
-{% note danger danger %}
+{% note danger danger@danger %}
 danger
 {% endnote %}
 
@@ -406,7 +406,7 @@ hexo.extend.tag.register('can', caniUse);
 `centerquote` or `cq`
 
 {% cq %}
-So we beat on, boats against the current, borne back ceaselessly into the past.
+So we beat on, boats against the current, borne back ceaselessly into the past.<br/>
 我们奋力向前，宛如逆水行舟，与激流抗争勇进，直至淹没入岁月长河。
 {% endcq %}
 
