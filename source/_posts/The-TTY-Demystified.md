@@ -348,7 +348,7 @@ isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echo
 -flusho -extproc
 ```
 
-该 `-a` 标志告诉 `stty` 显示的 *所有* 设置。默认情况下，它将查看连接到你的 Shell 的 TTY device，但是你可以使用 `-F` 指定另一个设备。
+该 `-a` 标志告诉 `stty` 显示的*所有*设置。默认情况下，它将查看连接到你的 Shell 的 TTY device，但是你可以使用 `-F` 指定另一个设备。
 
 其中一些设置取决于 UART 参数，有些会影响 line discipline，有些则与作业控制有关。全部放在一起供君取用。让我们先看一下第一行：
 

@@ -10,7 +10,7 @@ comments: true
 
 {% img right "/images/aloha.gif" 200 %}
 
-- CMU ~~(Carnegie Mellon University)~~ 在读 *医学牲*
+- CMU~~(Carnegie Mellon University)~~ 在读*医学牲*
 - 编程爱好者、（Neo）Vimmer
 
 **What am I doing?**

@@ -84,10 +84,10 @@ make
 完整变量列表见：https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 
 一些术语：
-- **源（码）树（source tree）**和**构建树（build tree）**：分别指项目 *源代码根目录*
-    和 *指定的生成二进制文件（等文件）的根目录* 和各自的子目录形成的树状目录结构。
-- **源（码）目录（source directory）**和**构建目录（build directory）**：*源码树* 和
-    *构建树* 中的位置，一般指顶层位置，但是可以移动，表示当前位置的变量一般含有 `CURRENT`。
+- **源（码）树（source tree）**和**构建树（build tree）**：分别指项目*源代码根目录*
+    和*指定的生成二进制文件（等文件）的根目录*和各自的子目录形成的树状目录结构。
+- **源（码）目录（source directory）**和**构建目录（build directory）**：*源码树*和
+    *构建树*中的位置，一般指顶层位置，但是可以移动，表示当前位置的变量一般含有 `CURRENT`。
 - CMake 目录种类 TODO
     - 顶层/根
     - 当前所处
@@ -263,7 +263,7 @@ install (FILES cmake-examples.conf
 #### 指定安装目录
 
 `CMAKE_INSTALL_PREFIX` 的值默认为 `/usr/local/`，要改变其值，可以在添加
-*可执行文件和库文件* 前在顶层（top level）CMakeLists.txt 中添加如下内容：
+*可执行文件和库文件*前在顶层（top level）CMakeLists.txt 中添加如下内容：
 
 ```cmake
 if( CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT )
