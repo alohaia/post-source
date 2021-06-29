@@ -70,11 +70,11 @@ curses
 
 ### Session Management
 
-用户可能希望同时运行多个程序，并一次与一个程序交互。如果程序陷入无尽的循环，则用户可能想杀死（kill）或挂起（suspend）。在后台启动的程序应能够执行，直到它们尝试写入终端为止，此时应将其挂起。同样，用户输入应仅定向到前台程序。操作系统在 **TTY driver** （进程可能会截获某些信号，并尝试适应这种情况，但大多数情况并非如此。[driver/tty/tty_io.c](https://github.com/torvalds/linux/blob/master/drivers/tty/tty_io.c)）中实现这些功能。
+用户可能希望同时运行多个程序，并一次与一个程序交互。如果程序陷入无尽的循环，则用户可能想杀死（kill）或挂起（suspend）。在后台启动的程序应能够执行，直到它们尝试写入终端为止，此时应将其挂起。同样，用户输入应仅定向到前台程序。操作系统在 **TTY driver**（进程可能会截获某些信号，并尝试适应这种情况，但大多数情况并非如此。[driver/tty/tty_io.c](https://github.com/torvalds/linux/blob/master/drivers/tty/tty_io.c)）中实现这些功能。
 
-一个操作系统进程是“alive”的（有执行上下文（execution context）），意味着它能进行某些动作。在面对对象的术语中，TTY driver 是一个 **被动对象**（passive object） 。它有一些数据字段和一些方法，但是能做些什么的唯一方式只有通过进程的上下文（context）或内核中断处理程序（kernel interrupt handler）调用。Line discipline 同样也是一个被动对象（entity）。
+一个操作系统进程是“alive”的（有执行上下文（execution context）），意味着它能进行某些动作。在面对对象的术语中，TTY driver 是一个**被动对象**（passive object） 。它有一些数据字段和一些方法，但是能做些什么的唯一方式只有通过进程的上下文（context）或内核中断处理程序（kernel interrupt handler）调用。Line discipline 同样也是一个被动对象（entity）。
 
-UART driver、line discipline 实例和 TTY driver 这三者有时会一起被称为一个 **TTY device** ，或者简单地称为 **TTY** 。用户可以通过操作 `/dev` 目录下对应的设备文件来影响任何 TTY device的行为。由于需要对此设备文件的写入权限，用户在某个特定的 TTY 上登录时，必须成为设备文件的所有者（owner）。这个操作习惯上由以 root 权限运行的 `login(1)` 程序完成。
+UART driver、line discipline 实例和 TTY driver 这三者有时会一起被称为一个 **TTY device**，或者简单地称为 **TTY**。用户可以通过操作 `/dev` 目录下对应的设备文件来影响任何 TTY device的行为。由于需要对此设备文件的写入权限，用户在某个特定的 TTY 上登录时，必须成为设备文件的所有者（owner）。这个操作习惯上由以 root 权限运行的 `login(1)` 程序完成。
 
 之前图片中的 physical line 当然也可以是一根很长的电话线：
 
@@ -135,7 +135,7 @@ F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
 
 ## Jobs and Sessions
 
-作业控制（Job control）发生在你按下 `^Z` (Ctrl-Z) 来挂起一个程序，或用 `&` 来启动一个程序时。一个作业（job）和一个进程组（process group）是一样的。Internal shell commands（built-in commands in the shell）如 `jobs`，`fg` 和 `bg`，能用来操作一个 **会话**（session） 中存在的作业。
+作业控制（Job control）发生在你按下 `^Z` (Ctrl-Z) 来挂起一个程序，或用 `&` 来启动一个程序时。一个作业（job）和一个进程组（process group）是一样的。Internal shell commands（built-in commands in the shell）如 `jobs`，`fg` 和 `bg`，能用来操作一个**会话**（session） 中存在的作业。
 
 每个会话都由一个 **session leader** 管理。session leader，一般是 shell，通过信号和 system call 的复杂协议与内核紧密合作。
 
@@ -226,59 +226,59 @@ HUP INT QUIT ILL TRAP ABRT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT CHL
 本文将重点介绍以下信号：`SIGHUP`，`SIGINT`，`SIGQUIT`，`SIGPIPE`，`SIGCHLD`，`SIGSTOP`，`SIGCONT`，`SIGTSTP`，`SIGTTIN`，`SIGTTOU` 和 `SIGWINCH`。
 
 SIGHUP
-: 默认行为： **Terminate**
+: 默认行为：**Terminate**
 : 可能行为：Terminate，Ignore，Function call
 : 检测到挂起（hangup）的情况时，UART driver 会将 `SIGHUP` 信号发送到整个会话。这一般会杀掉会话中的所用进程。有些进程。如 `nohub(1)` 和 `screen(1)` 会从它们的进程（和 TTY）中分离，所以它们的子进程不会注意到挂起。
 
 SIGINT
-: 默认行为： **Terminate**
+: 默认行为：**Terminate**
 : 可能行为：Terminate，Ignore，Function call
 : 当交互式注意字符（interactive attention character，通常是 `^C`，ASCII 码为 3）出现在输入流中时，TTY driver 会将 `SIGINT` 发送给当前的前台作业，除非此行为被关闭。只要有 TTY device 的访问（access）权限，就能改变交互式注意字符和开关这一特性。另外，session leader (manager) 会跟踪每个作业的 TTY 配置，并在每次切换作业时更新 TTY （配置）。
 
 SIGQUIT
-: 默认行为： **Core dump**
+: 默认行为：**Core dump**
 : 可能行为：Core dump，Ignore，Function call
 : `SIGQUIT` 和 `SIGINT` 的工作方式相似，但是对应字符为 `^\` 并且默认行为不同。
 
 SIGPIPE
-: 默认行为： **Terminate**
+: 默认行为：**Terminate**
 : 可能行为：Terminate，Ignore，Function call
 : 内核会将 `SIGPIPE` 发送给任何〔尝试写入〔没有读取器的管道〕的〕进程。这是很有用的，因为如果没有这个，`yes | head` 这样的进程将永远不会中止。
 
 > `yes` 不断输出一个字符串，直到被杀死为止。
 
 SIGCHLD
-: 默认行为： **Ignore**
+: 默认行为：**Ignore**
 : 可能行为：Ignore，Function call
 : 当一个进程死亡或改变状态（停止或继续），内核会将一个 `SIGCHLD` 信号发送给其父进程。`SIGCHLD` 携带了额外信息，如该进程的 ID，用户 ID，exit status （或 termination signal）和其他 执行时间数据（execution time statistics）。Session leader 借助此信号追踪其作业。
 
 SIGSTOP
-: 默认行为： **Suspend**
+: 默认行为：**Suspend**
 : 可能行为：Suspend
 : 此信号会无条件地将接受者挂起，也就是说，其行为无法被重新设置。然而，请注意内核不会在作业控制过程中发送 `SIGSTOP` 信号。作为替代，`^Z` 通常会触发 `SIGTSTP`。`SIGTSTP` 可以被应用程序拦截。应用程序可以将光标移动到屏幕底部，或者将终端置于已知状态（known state），然后使用 `SIGSTOP` 让自己进入睡眠状态。
 
 SIGCONT
-: 默认行为： **Wake up**
+: 默认行为：**Wake up**
 : 可能行为：Wake up，Wake up + Function call
 : `SIGCONT` 会将一个被停止的进程取消挂起（un-suspend）。用户调用 `fg` 命令时，它会被显式发送给指定进程。
 
 SIGTSTP
-: 默认行为： **Suspend**
+: 默认行为：**Suspend**
 : 可能行为：Suspend，Ignore，Function call
 : `SIGTSTP` 的工作方式和 `SIGINT` 与 `SIGQUIT` 类似，但是 “magic” 字符一般是 `^Z` 并且默认行为是挂起进程。
 
 SIGTTIN
-: 默认行为： **Suspend**
+: 默认行为：**Suspend**
 : 可能行为：Suspend，Ignore，Function call
 : 如果一个后台作业中的进程尝试从 TTY device 读取，TTY 会向整个作业发送 `SIGTTIN`。这通常会挂起该作业。
 
 SIGTTOU
-: 默认行为： **Suspend**
+: 默认行为：**Suspend**
 : 可能行为：Suspend，Ignore，Function call
 : 如果一个后台作业中的进程尝试写入到 TTY device，TTY 会向整个作业发送 `SIGTOUT`。这通常会挂起该作业。可以为单独的 TTY 关闭此功能。
 
 SIGWINCH
-: 默认行为： **Ignore**
+: 默认行为：**Ignore**
 : 可能行为：Ignore，Function call
 : 如前所述，TTY device 会追踪终端的大小（行列数），但是此信息需要手动更新。每当终端窗口大小改变时，TTY 会发送一个 `SIGWINCH` 信号给前台作业。行为良好的（well-behaving）交互式应用程序，如编辑器，会对此做出回应——获取新的终端大小并重新绘制自己。
 

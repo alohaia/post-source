@@ -86,7 +86,7 @@ make
 一些术语：
 - **源（码）树（source tree）**和**构建树（build tree）**：分别指项目 *源代码根目录*
     和 *指定的生成二进制文件（等文件）的根目录* 和各自的子目录形成的树状目录结构。
-- **源（码）目录（source directory）** 和 **构建目录（build directory）**：*源码树* 和
+- **源（码）目录（source directory）**和**构建目录（build directory）**：*源码树* 和
     *构建树* 中的位置，一般指顶层位置，但是可以移动，表示当前位置的变量一般含有 `CURRENT`。
 - CMake 目录种类 TODO
     - 顶层/根
@@ -346,14 +346,14 @@ target_compile_definitions(cmake_examples_compile_flags
 
 这会使编译器在变异目标（`cmake_examples_compile_flags`）时添加 `-DEX3` 标志。
 
-使用该函数会填充 **库** 的 [`INTERFACE_COMPILE_DEFINITIONS`](https://cmake.org/cmake/help/v3.0/prop_tgt/INTERFACE_COMPILE_DEFINITIONS.html#prop_tgt:INTERFACE_COMPILE_DEFINITIONS)
+使用该函数会填充**库**的 [`INTERFACE_COMPILE_DEFINITIONS`](https://cmake.org/cmake/help/v3.0/prop_tgt/INTERFACE_COMPILE_DEFINITIONS.html#prop_tgt:INTERFACE_COMPILE_DEFINITIONS)
 变量，并会根据作用域（scope）将定义传递给链接的对象。<br/>
 如果目标是一个库并且选择的作用域是 `PUBLIC` 或 `INTERFACE`，那么定义还会被包含在链接到该库的所有对象中。
 
 #### 设置编译器标志
 
 `CMAKE_CXX_FLAGS` 要么为空，要么包含所选构建类型的对应标志。<br/>
-要设置 **额外** 的编译标志，可以在顶层 CMakeLists.txt 中添加如下内容：
+要设置**额外**的编译标志，可以在顶层 CMakeLists.txt 中添加如下内容：
 
 ```cmake
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler Flags" FORCE)

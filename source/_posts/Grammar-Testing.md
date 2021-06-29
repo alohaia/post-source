@@ -5,9 +5,11 @@ mathjax: true
 comments: false
 ---
 
-@[toc]
+语法测试用。
 
 <!-- more -->
+
+@[toc]
 
 ## reason
 
@@ -577,6 +579,10 @@ function mermaid(args, content) {
 
 hexo.extend.tag.register('mermaid', mermaid, {ends: true});
 ```
+- Documentation:
+    - NexT: https://theme-next.js.org/docs/tag-plugins/mermaid.html
+    - Github: https://github.com/mermaid-js/mermaid 、http://mermaid-js.github.io/mermaid/#/flowchart
+    - Live editor: https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0hhcmRdIC0tPnxUZXh0fCBCKFJvdW5kKVxuICAgIEIgLS0-IEN7RGVjaXNpb259XG4gICAgQyAtLT58T25lfCBEW1Jlc3VsdCAxXVxuICAgIEMgLS0-fFR3b3wgRVtSZXN1bHQgMl0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ
 
 #### Pdf
 
