@@ -1,0 +1,10 @@
+default:
+  coauthor: 合著者
+en:
+  coauthor: Coauthor
+cn:
+  coauthor: 合著者
+zh-CN:
+  coauthor: 合著者
+zh-TW:
+  coauthor: 合著者

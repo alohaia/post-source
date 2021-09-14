@@ -12,9 +12,9 @@ categories:
 
 GitHub repository: https://github.com/ttroy50/cmake-examples
 
-CMake 是个一个开源的跨平台自动化建构系统，用来管理软件建置的程序，并不依赖于某特定编译器，并可支持多层目录、多个应用程序与多个库。<br/>
+CMake 是个一个开源的跨平台自动化建构系统，用来管理软件建置的程序，并不依赖于某特定编译器，并可支持多层目录、多个应用程序与多个库。
 它用配置文件控制建构过程（build process）的方式和 Unix 的 make 相似，只是 CMake
-的配置文件取名为 CMakeLists.txt。<br/>
+的配置文件取名为 CMakeLists.txt。
 CMake 并不直接建构出最终的软件，而是产生标准的建构档（如 Unix 的 Makefile 或
 Windows Visual C++ 的 projects/workspaces），然后再依一般的建构方式使用。
 
@@ -22,7 +22,7 @@ Windows Visual C++ 的 projects/workspaces），然后再依一般的建构方�
 
 > 原文中将 CMake 命令称为“函数”。本文沿用了这种称法。
 
-## 基础
+# 基础
 
 最基本的 Hello World CMakeLists.txt 文件：
 
@@ -52,7 +52,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 在这个例子中，[`project()`](https://cmake.org/cmake/help/latest/command/project.html) 函数将变量 `PROJECT_NAME` 设置为 `hello_cmake`，在 [`add_executable()`](https://cmake.org/cmake/help/latest/command/add_executable.html) 函数中则使用了这个变量指定可执行文件名。
 {% endnote %}
 
-### 二进制目录
+## 二进制目录
 
 我们运行 `cmake`（可带参数）命令时所在的目录（即当前工作目录、`pwd` 显示的目录）被称为
 `CMAKE_BINARY_DIR`。这是你的生成的二进制文件所在的根目录（通常还会有一些其他文件）。
@@ -60,13 +60,13 @@ add_executable(${PROJECT_NAME} main.cpp)
 CMake 支持两种生成二进制文件的方式——就地构建（in-place
 build）和源外构建（out-of-source build）。
 
-#### 就地构建
+### 就地构建
 
 要以这种方式构建，只需在项目根目录（其实是 CMakeLists.txt 所在的目录）执行
 `cmake`（不指定项目根目录，见下）命令。这样做会使 CMake
 生成的临时文件和二进制文件和项目文件混在一起。
 
-#### 源外构建
+### 源外构建
 
 要采用源外构建，在任一非项目根目录的目录中执行 `cmake <project_root>` 命令，其中
 `<project_root>` 为项目根目录。这种方式生成的临时文件和二进制文件等会被放在执行
@@ -79,7 +79,7 @@ mkdir build && cd build && cmake ..
 make
 ```
 
-### 其他目录路径变量
+## 其他目录路径变量
 
 完整变量列表见：https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
 
@@ -102,7 +102,7 @@ make
 | [`CMAKE_CURRENT_BINARY_DIR`](https://cmake.org/cmake/help/latest/variable/CMAKE_CURRENT_BINARY_DIR.html) | 当前所在的构建目录（build tree） | 
 | [`PROJECT_BINARY_DIR`](https://cmake.org/cmake/help/latest/variable/PROJECT_BINARY_DIR.html)             | 项目的构建目录                   |
 
-### 源文件变量
+## 源文件变量
 
 可以声明一个变量保存要使用的源文件名，以便之后使用：
 
@@ -125,7 +125,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 file(GLOB SOURCES "src/*.cpp")
 ```
 
-### 包含目录
+## 包含目录
 
 使用 [`target_include_directories()`](https://cmake.org/cmake/help/latest/command/target_include_directories.html) 函数为目标（target）添加包含目录（include path），这样添加的目录会在生成目标时以 `-I` 选项传递给编译器。
 
@@ -142,11 +142,11 @@ target_include_directories(target
 
 详细解释见下面的[库](#库)。
 
-### 库
+## 库
 
-#### 创建库
+### 创建库
 
-<a href="{% post_path 使用 %}">使用</a> [`add_library()`](https://cmake.org/cmake/help/latest/command/add_library.html) 函数以用指定源文件创建一个库文件。
+使用 [`add_library()`](https://cmake.org/cmake/help/latest/command/add_library.html) 函数以用指定源文件创建一个库文件。
 
 如要创建静态库，可以像这样写：
 
@@ -169,7 +169,7 @@ add_library(hello_library STATIC
 - `INTERFACE`：参数会被添加为**与该库链接的所有的目标**的包含目录之一
 - `PUBLIC`：相当于前两个作用域相加的效果
 
-#### 链接库和目标
+### 链接库
 
 要将指定目标与库链接，使用 `target_link_libraries()` 函数：
 
@@ -209,13 +209,13 @@ add_executable(main ALIAS hello_binary)
 ```
 {% endnote %}
 
-### 安装
+## 安装
 
 CMake 提供了生成 `make install` 目标（是 Makefile 中的 target，而不是之前提到的
-CMake 中的 target）的功能。<br/>
+CMake 中的 target）的功能。
 安装目录可以通过 `CMAKE_INSTALL_PREFIX` 指定，详见 [指定安装目录](#指定安装目录)。
 
-#### install 函数
+### install 函数
 
 安装由 [`install()`](https://cmake.org/cmake/help/latest/command/install.html) 函数控制。
 
@@ -253,14 +253,14 @@ install (FILES cmake-examples.conf
     DESTINATION etc)
 ```
 
-#### install_manifest.txt
+### install_manifest.txt
 
 运行完 `make install` 后，CMake 会生成一个名为 install_manifest.txt
 的文件，其中包含了所有安装文件的详细信息。
 
 如果以 root 运行 `make install`，install_manifest.txt 会为 root 所有。
 
-#### 指定安装目录
+### 指定安装目录
 
 `CMAKE_INSTALL_PREFIX` 的值默认为 `/usr/local/`，要改变其值，可以在添加
 *可执行文件和库文件*前在顶层（top level）CMakeLists.txt 中添加如下内容：
@@ -282,20 +282,20 @@ endif()
 make install DESTDIR=/tmp/stage
 ```
 
-这会创建 `${DESTDIR}/${CMAKE_INSTALL_PREFIX}` 作为安装目录。<br/>
+这会创建 `${DESTDIR}/${CMAKE_INSTALL_PREFIX}` 作为安装目录。
 在这个例子中，安装目录为 `/tmp/stage/usr/local`。
 
-#### 卸载
+### 卸载
 
-CMake 默认不提供 `make uninstall` 对象。<br/>
-要添加 `make uninstall` 对象，可以参考 [Can I do "make uninstall" with CMake?](https://gitlab.kitware.com/cmake/community/-/wikis/FAQ)。
+CMake 默认不提供 `make uninstall` 对象。
+要添加 `make uninstall` 对象，可以参考 [Can I do "make uninstall" with CMake?](https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake)。
 
 一个简单的做法是利用 install_manifest.txt 文件：
 
 ```cmake
 sudo xargs rm < install_manifest.txt
 ```
-### 构建类型
+## 构建类型
 
 CMake 内置了几种构建类型，其原理就是向编译器传递一些标志（flags）：
 
@@ -315,7 +315,7 @@ CMake 内置了几种构建类型，其原理就是向编译器传递一些标�
     cmake .. -DCMAKE_BUILD_TYPE=Release
     ```
 
-CMake 提供的默认的构建类型不包含任何相关的编译器标志，以优化程序。<br/>
+CMake 提供的默认的构建类型不包含任何相关的编译器标志，以优化程序。
 但是有时可能会需要设置默认构建类型，可以在顶层 CMakeList.txt 中添加如下内容：
 
 ```cmake
@@ -328,15 +328,15 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 ```
 
-### 编译器标志
+## 编译器标志
 
 CMake 支持用若干种方式设置编译器标志：
 - 使用函数 [`target_compile_definitions()`](https://cmake.org/cmake/help/latest/command/target_compile_definitions.html) 和 [`target_compile_options()`](https://cmake.org/cmake/help/latest/command/target_compile_options.html)
 - 使用变量 `CMAKE_C_FLAGS` 和 `CMAKE_CXX_FLAGS`，见 [`CMAKE_<LANG>_FLAGS`](https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS.html)
 
-#### 为指定目标设置
+### 为指定目标设置
 
-在现代 CMake 中设置 C++ 标志的推荐方法是使用按对象标志（per-target flags），可以通过 `target_compile_definitions()` 函数将其填充到其他对象。
+在现代 CMake 中设置 C++ 标志的推荐方法是使用按对象标志（per-target flags），可以通过 `target_compile_definitions()` 函数为对象添加定义：
 
 ```cmake
 target_compile_definitions(cmake_examples_compile_flags
@@ -344,16 +344,15 @@ target_compile_definitions(cmake_examples_compile_flags
 )
 ```
 
-这会使编译器在变异目标（`cmake_examples_compile_flags`）时添加 `-DEX3` 标志。
+这会使编译器在编译目标（`cmake_examples_compile_flags`）时添加 `-DEX3` 标志。
 
-使用该函数会填充**库**的 [`INTERFACE_COMPILE_DEFINITIONS`](https://cmake.org/cmake/help/v3.0/prop_tgt/INTERFACE_COMPILE_DEFINITIONS.html#prop_tgt:INTERFACE_COMPILE_DEFINITIONS)
-变量，并会根据作用域（scope）将定义传递给链接的对象。<br/>
-如果目标是一个库并且选择的作用域是 `PUBLIC` 或 `INTERFACE`，那么定义还会被包含在链接到该库的所有对象中。
+使用该函数会填充**库**的 [`INTERFACE_COMPILE_DEFINITIONS`](https://cmake.org/cmake/help/v3.0/prop_tgt/INTERFACE_COMPILE_DEFINITIONS.html#prop_tgt:INTERFACE_COMPILE_DEFINITIONS) 变量，并会根据作用域（scope）将定义传递给链接的对象。如果目标是一个库并且选择的作用域是 `PUBLIC` 或 `INTERFACE`，那么定义还会被包含在链接到该库的所有对象中。
 
-#### 设置编译器标志
+另外，CMake 提供了 [`target_compile_options`](https://cmake.org/cmake/help/latest/command/target_compile_options.html) 来为目标添加编译选项。
 
-`CMAKE_CXX_FLAGS` 要么为空，要么包含所选构建类型的对应标志。<br/>
-要设置**额外**的编译标志，可以在顶层 CMakeLists.txt 中添加如下内容：
+### 设置编译器标志
+
+`CMAKE_CXX_FLAGS` 要么为空，要么包含所选构建类型的对应标志。要设置**额外**的编译标志，可以在顶层 CMakeLists.txt 中添加如下内容：
 
 ```cmake
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler Flags" FORCE)
@@ -364,10 +363,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler Fl
 {% endnote %}
 
 
-类似地，`CMAKE_C_FLAGS` 等变量也可以以同样的方式设置。其他变量见 [`CMAKE_<LANG>_FLAGS`](https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS.html)。<br/>
-一旦设置了这些变量，CMake 会为此目录及其子目录下的所有目标设置编译器标志，因此更推荐使用 `target_compile_definitions` 函数。
+类似地，`CMAKE_C_FLAGS` 等变量也可以以同样的方式设置。其他变量见 [`CMAKE_<LANG>_FLAGS`](https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_FLAGS.html)。一旦设置了这些变量，CMake 会为此目录及其子目录下的所有目标设置编译器标志，因此更推荐使用 `target_compile_definitions` 函数。
 
-#### 设置链接器标志
+### 设置链接器标志
 
 参考：[How do I add a linker or compile flag in a CMake file?](https://stackoverflow.com/questions/11783932/how-do-i-add-a-linker-or-compile-flag-in-a-cmake-file)
 
@@ -401,10 +399,9 @@ SET(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
     set_target_properties(${THE_TARGET} PROPERTIES COMPILE_FLAGS ${TEMP} )
     ```
 
-### 第三方库
+## 第三方库
 
-CMake 提供了 [`find_package()`](https://cmake.org/cmake/help/latest/command/find_package.html) 函数来寻找第三方软件包文件所在路径。<br/>
-该函数会在 [`CMAKE_MODULE_PATH`](https://cmake.org/cmake/help/latest/variable/CMAKE_MODULE_PATH.html) 中的目录列表中的目录中寻找形似 "FindXXX.cmake" 的文件。Linux 中的默认搜索路径为 `/usr/share/cmake/Modules`（或者 `/usr/share/cmake-3.20/Modules`）。
+CMake 提供了 [`find_package()`](https://cmake.org/cmake/help/latest/command/find_package.html) 函数来寻找第三方软件包文件所在路径。该函数会在 [`CMAKE_MODULE_PATH`](https://cmake.org/cmake/help/latest/variable/CMAKE_MODULE_PATH.html) 中的目录列表中的目录中寻找形似 "FindXXX.cmake" 的文件。Linux 中的默认搜索路径为 `/usr/share/cmake/Modules`（或者 `/usr/share/cmake-3.20/Modules`）。
 
 如要寻找 Boost：
 
@@ -417,7 +414,7 @@ find_package(Boost 1.46.1 REQUIRED COMPONENTS filesystem system)
 - `REQUIRED`：指定为必须，如果没找到符合要求的包则构建失败
 - `COMPONENTS <...>`：库的组件列表
 
-#### 检查是否找到软件包
+### 检查是否找到软件包
 
 大多数软件包（的 FindXXX.cmake 文件）会设置 `XXX_FOUND` 变量，可以通过检查该变量判断软件包是否被找到。
 
@@ -430,13 +427,13 @@ else()
 endif()
 ```
 
-#### 暴露变量
+### 暴露变量
 
 找到指定的包（其实是加载了指定 FindXXX.cmake 文件）后，我们可以获得一些变量来帮助我们确定所需文件位置，如 `Boost_INCLUDE_DIRS` 就指明了 Boost 的包含文件所在目录。
 
 有时可以通过 ccmake 或 cmake-gui 查看环境变量以确定所需变量。
 
-#### 别名和导入目标
+### 别名和导入目标
 
 大多数 CMake 库，在其模块文件中导出别名目标。
 
@@ -455,7 +452,7 @@ target_link_libraries(third_party_include
 
 这些目标会包含了它们的依赖，链接 `Boost::filesystem` 会自动添加 `Boost::boost` 和 `Boost::system` 依赖。
 
-#### 非别名目标
+### 非别名目标
 
 有些第三方库没有使用可导入的目标，这时就必须使用以下两个变量：
 - `xxx_INCLUDE_DIRS`：include directory

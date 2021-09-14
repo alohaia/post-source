@@ -22,11 +22,9 @@ comments: true
 
 **What do I wanna do?**
 
-{% img right https://github-readme-stats.vercel.app/api?username=alohaia&show_icons=true&theme=tokyonight %}
-
 - <a href="{% post_path 自制伪终端 %}">自制伪终端</a> - Lua 配置，输入法支持
 - 我爱数学 - 数学建模与应用、统计分析
-- 计算机图形学 - <a href="{% post_path OpenGL %}">OpenGL</a>、Vulkan
+- 计算机图形学 - <a href="{% post_path OpenGL %}">OpenGL</a>、<a href="{% post_path Vulkan %}">Vulkan</a>
 
 **How to contact me?**
 

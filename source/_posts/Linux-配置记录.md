@@ -13,20 +13,20 @@ categories:
 
 <!-- more -->
 
-## 踩坑记录
+# 踩坑记录
 
-### 用 Manjaro 安装镜像分区
+## 用 Manjaro 安装镜像分区
 
 Manjaro 安装程序分区有时候会有问题，建议先用 `fdisk` 分好区并格式化。
 
-### 把 HOME 目录下的目录名改为英文
+## 把 HOME 目录下的目录名改为英文
 
 ```bash
 sudo pacman -S xdg-user-dirs-gtk && export LANG=en_US && xdg-user-dirs-gtk-update
 export LANG=zh_CN.UTF-8
 ```
 
-### Arch 系安装 deb 包
+## Arch 系安装 deb 包
 
 ```bash
 # 安装 debtap
@@ -40,9 +40,9 @@ debtap <deb 包>
 sudo pacman -U <arch 包>
 ```
 
-## Linux 安装及基本配置
+# Linux 安装及基本配置
 
-### Linux 安装
+## Linux 安装
 
 **镜像及启动盘制作**（[清华镜像站](https://mirrors.tuna.tsinghua.edu.cn/)）
 - Arch Linux：https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/
@@ -60,7 +60,7 @@ sudo pacman -U <arch 包>
 
 Arch
 1. 参考 ArchWiki 的 [Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-2. 4-1-2021，官方发布[消息](https://archlinux.org/news/installation-medium-with-installer/)，可通过“a guided installer”安装 Arch Linux。镜像自带该安装器，只需在镜像系统中使用 `archinstall` 即可启动菜单式安装。~~爷的青春结束了~~
+2. 4-1-2021，官方发布[消息](https://archlinux.org/news/installation-medium-with-installer/)，可通过“a guided installer”安装 Arch Linux。镜像自带该安装器，只需在镜像系统中使用 `archinstall` 即可启动菜单式安装。{% hdt 爷的青春结束了 %}
 
 Manjaro：自带图形安装界面
 
@@ -172,13 +172,13 @@ umount ${back_mnt}
 rmdir -p ${back_mnt_rel}
 ```
 
-## pacman 换源
+# pacman 换源
 
 1. 方法 1：sudo pacman-mirrors -i -c China -m rank
 2. 方法 2：在 /etc/pacman.d/mirrorlist 开头加上：
 
 ```xxx /etc/pacman.d/mirrorlist
-## Country : China
+# Country : China
 Server = https://mirrors.sjtug.sjtu.edu.cn/manjarostable/$repo/$arch
 ```
 然后同步本地数据库：`sudo pacman -Syy`
@@ -195,9 +195,9 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 然后执行命令：`sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring`
 
-## 软件和开发环境
+# 软件和开发环境
 
-### WPS
+## WPS
 
 ```bash
 paru -S wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn
@@ -211,13 +211,13 @@ paru -S wps-office-cn ttf-wps-fonts wps-office-mui-zh-cn
 # this might bring you problem with signing in.
 ```
 
-### 字体
+## 字体
 
 Nerd 字体：`nerd-fonts-jetbrains-mono` 或 `nerd-fonts-fira-code`
 
 中文字体：`ttf-sarasa-gothic` 或 `adobe-source-han-serif-otc-fonts` 和 `adobe-source-han-sans-otc-fonts`
 
-### fcitx 输入法
+## fcitx 输入法
 
 ```bash
 sudo pacman -S fcitx5-im fcitx5-material-color fcitx5-rime librime
@@ -242,7 +242,7 @@ Rime 配置目录：`~/.local/share/fcitx5/rime/`
 - Rime Github 主页：https://github.com/rime/home
 
 
-### MariaDB 和 lua-mysql
+## MariaDB 和 lua-mysql
 
 - lua-mysql
 

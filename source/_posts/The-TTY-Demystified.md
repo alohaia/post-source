@@ -47,9 +47,9 @@ Serial device
 
 嵌入式设计中，UART用来与PC进行通信，包括与监控调试器和其它器件，如 EEPROM 通信。
 
-## The Use Case
+# The Use Case
 
-### Line Editing
+## Line Editing
 
 {% asset_img case1.png "case1'case1'" %}
 
@@ -68,7 +68,7 @@ curses
 : CRT (Cathode Ray Tube, 阴极射线管) screen handling and optimization package.
 : See `man curses`
 
-### Session Management
+## Session Management
 
 用户可能希望同时运行多个程序，并一次与一个程序交互。如果程序陷入无尽的循环，则用户可能想杀死（kill）或挂起（suspend）。在后台启动的程序应能够执行，直到它们尝试写入终端为止，此时应将其挂起。同样，用户输入应仅定向到前台程序。操作系统在 **TTY driver**（进程可能会截获某些信号，并尝试适应这种情况，但大多数情况并非如此。[driver/tty/tty_io.c](https://github.com/torvalds/linux/blob/master/drivers/tty/tty_io.c)）中实现这些功能。
 
@@ -101,7 +101,7 @@ VGA
 
 {% asset_img case4.png "case4'case4'" %}
 
-## Processes
+# Processes
 
 一个 Linux 进程可能处于以下状态之一：
 
@@ -133,7 +133,7 @@ F   UID   PID  PPID PRI  NI    VSZ   RSS WCHAN  STAT TTY        TIME COMMAND
 - `S`: 进程是一个 [session leader](#session-leader)
 - `+`: 进程属于一个前台进程组（foreground process group)
 
-## Jobs and Sessions
+# Jobs and Sessions
 
 作业控制（Job control）发生在你按下 `^Z` (Ctrl-Z) 来挂起一个程序，或用 `&` 来启动一个程序时。一个作业（job）和一个进程组（process group）是一样的。Internal shell commands（built-in commands in the shell）如 `jobs`，`fg` 和 `bg`，能用来操作一个**会话**（session） 中存在的作业。
 
@@ -182,7 +182,7 @@ TTY driver 仅以被动方式跟踪前台进程组 ID。Session leader 必须在
 [1]  + 170055 suspended (tty input)  cat
 ```
 
-## Signal Madness
+# Signal Madness
 
 现在，让我们仔细看看内核中的 TTY driver，line discipline 和 UART driver 如何与用户态进程（userland processes）通信。
 
@@ -282,7 +282,7 @@ SIGWINCH
 : 可能行为：Ignore，Function call
 : 如前所述，TTY device 会追踪终端的大小（行列数），但是此信息需要手动更新。每当终端窗口大小改变时，TTY 会发送一个 `SIGWINCH` 信号给前台作业。行为良好的（well-behaving）交互式应用程序，如编辑器，会对此做出回应——获取新的终端大小并重新绘制自己。
 
-## A Example
+# A Example
 
 假设您正在（基于终端的）编辑器（如 Vim）中编辑文件。光标位于屏幕中间的某处，编辑器正忙于执行一些处理器密集型任务（processor intensive task），例如对大文件的搜索和替换操作。现在你按 `^Z`。由于已将 line discipline 配置为拦截该字符（`^Z` 是一个字节，ASCII 码为 26），因此你不必等待编辑器完成其任务再开始从 TTY device 读取。取而代之的是，line discipline 子系统立即将 `SIGTSTP` 发送到前台进程组。该进程组包含编辑器以及由它创建的任何子进程。
 
@@ -294,7 +294,7 @@ SIGWINCH
 
 然而当我们使用 `fg` 命令（如 `fg %vim`）时，shell 首先会恢复原先保存的 line discipline 配置。这告诉 TTY driver 编辑器作业从现在起应该被视为前台作业。最后，shell 会向编辑器进程组发送 `SIGCONT` 信号。编辑器进程将会尝试重绘其 GUI （其实是 TUI）。因为它现在是前台进程组的一部分，所以这次它不会被 `SIGTTOU` 信号中断。
 
-## Flow control and blocking I/O
+# Flow control and blocking I/O
 
 （流控制和阻断式 I/O）
 
@@ -312,7 +312,7 @@ SIGWINCH
 
 这里有一个重要的区别：对 TTY 的写入操作可能会由于流控制，也可能会由于内核缓冲区空间不足而停止，这会阻塞你的进程，但是因为后台作业尝试写入 TTY 而引发的 `SIGTTOU` 会挂起整个进程组。我不知道为什么 UNIX 的设计者会发明 `SIGTTOU` 和 `SIGTTIN` 而不是依靠阻塞式 I/O，但是我的猜测是负责作业控制的 TTY driver 旨在监控和操控整个作业，而不是其中的单个进程。
 
-## Configuring the TTY Device
+# Configuring the TTY Device
 
 要找出当前 shell 的控制 TTY（controlling terminal）是什么，可以参考前面所述的 `ps l` 输出中的 TTY 列，或者可以简单地运行 `tty(1)` 命令。
 
@@ -419,7 +419,7 @@ stty -tostop; (sleep 5; echo hello, world) &
 
 最后，`stty sane` 会重置你的 TTY device 到合理的设置（一般为默认设置）。
 
-## Conclusion
+# Conclusion
 
 我希望本文为您提供了足够的信息，以使您能够熟悉 TTY drivers 和 line disciplines，以及它们与终端、line editing 和作业控制的关系。可以在我提到的各种手册页以及 glibc 手册（`info libc` 中的 “Job Control”）中找到更多详细信息。
 

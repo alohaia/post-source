@@ -16,7 +16,7 @@ My snippets: https://github.com/alohaia/nvimcfg/tree/lua/UltiSnips
 
 <!-- more -->
 
-## Include Other Snippet Files
+# Include Other Snippet Files
 
 Add c snippets for cpp files for example.
 
@@ -30,7 +30,7 @@ Add c snippets for cpp files for example.
     ```
 
 
-## Keywords
+# Keywords
 
 1. `extends`: See above.
 2. `priority`: Set priority for all snippet defined in the current file.
@@ -39,7 +39,7 @@ Add c snippets for cpp files for example.
 5. `pre_expand` `post_expand` `post_jump`: Declare snippet actions.
 
 
-## Snippets' Format
+# Snippets' Format
 
     snippet trigger_word [ "description" [ options ] ]
     ...
@@ -58,7 +58,7 @@ another character.
 - `description`: A string describing the trigger.
 - `options`: See below.
 
-## Snippet Options
+# Snippet Options
 
 - `b`: Beginning of line - A snippet with this option is expanded only if the tab trigger is the first word on the line. In other words, if only whitespace precedes the tab trigger, expand. The default is to expand snippets at any position regardless of the preceding non-whitespace characters.
 - `i`: In-word expansion - By default a snippet is expanded only if the tab trigger is the first word on the line or is preceded by one or more whitespace characters. A snippet with this option is expanded regardless of the preceding character. In other words, the snippet can be triggered in the middle of a word.
@@ -71,14 +71,14 @@ another character.
 - `A`: Snippet will be triggered automatically, when condition matches. See UltiSnips-autotrigger for more info.
 
 
-## Character Escaping
+# Character Escaping
 
 > In snippet definitions, the characters `` ` ``, `{`, `$` and `\` have special
 > meaning. If you want to insert one of these characters literally, escape them
 > with a backslash, `\`.
 
 
-## Plaintext Snippets
+# Plaintext Snippets
 
 For example:
 ```
@@ -89,7 +89,7 @@ endsnippet
 ```
 
 
-## Tabstop and Placeholders
+# Tabstop and Placeholders
 
 A simplest tabstop looks like `$no`, `no` is a number starting from 1. `$0` is a special tabstop that is always the last tabstop no matter how many tabstops are defined.
 
@@ -121,7 +121,7 @@ Have a tabstop within another tabstop:
 > tabstop is essentially deleted.
 
 
-## Visual Placeholder
+# Visual Placeholder
 
 Format:
 ```
@@ -136,7 +136,7 @@ Details:
 2. With `/search/replace/option`, you can process the text like using `:s` command. See [Transformations](#transformations).
 
 
-## Mirrors
+# Mirrors
 
 Mirrors repeat the content of a tabstop.To mirror a tabstop simply insert the tabstop again using the "dollar sign followed by a number" syntax, e.g., `$1`.
 
@@ -148,10 +148,10 @@ Mirrors repeat the content of a tabstop.To mirror a tabstop simply insert the ta
     endsnippet
 
 
-## Interpolation
+# Interpolation
 
 
-### Shellcode
+## Shellcode
 
 An example may be the most helpful.
 ```xxx
@@ -162,7 +162,7 @@ endsnippet
 The output of command `date +%d.%m%y` will replace the text wrapped by backticks. You`ll get something like "Today is the 19.08.20."
 
 
-### Vimscript
+## Vimscript
 
 Similar to shellcode, but begins with \`v.
 ```xxx
@@ -176,7 +176,7 @@ endsnippet
 ```
 
 
-### Python
+## Python
 
 There are two choices:
 1. **\`#!/usr/bin/python ...\`**: Normal python code.
@@ -190,7 +190,7 @@ There are two choices:
 | t        | The values of the placeholders, `t[1]` is the text of `${1}`, etc.                                                                                                                  |
 | snip     | UltiSnips.TextObjects.SnippetUtil object instance. Has methods that simplify indentation handling and owns the string that should be inserted for the snippet.                   |
 | context  | Result of context condition. See UltiSnips-custom-context-snippets.                                                                                                                |
-| match    | Only in regular expression triggered snippets.<br> This is the return value of the match of the regular expression.<br> See http://docs.python.org/library/re.html#match-objects |
+| match    | Only in regular expression triggered snippets.<br/> This is the return value of the match of the regular expression.<br/> See http://docs.python.org/library/re.html#match-objects |
 
 **`snip` object**
 
@@ -266,7 +266,7 @@ operators:
 >in uppercase.
 
 
-## Global Snippets
+# Global Snippets
 
 Use `global` and `endglobal` to define Global snippets.
 
@@ -284,7 +284,7 @@ endglobal
 ```
 
 
-## Transformations
+# Transformations
 
 > Transformations are like mirrors but instead of just copying text from the
 > original tabstop verbatim, a regular expression is matched to the content of
@@ -301,12 +301,12 @@ The **components** are defined as follows:
 - `options`: Options for the regular expression
 
 
-### Regular Expression
+## Regular Expression
 
 See http://docs.python.org/library/re.html.
 
 
-### Replacement String
+## Replacement String
 
 The **replacement string** can contain `$no` variables, e.g., `$1`, which reference matched groups in the regular expression. The `$0` variable is special and yields the whole match. The replacement string can also contain special escape sequences:
 
@@ -324,7 +324,7 @@ optional and if not provided defaults to the empty string, "". This feature
 is very powerful. It allows you to add optional text into snippets.
 
 
-### Options
+## Options
 
 The **options** can be any combination of
 
@@ -355,7 +355,7 @@ The **options** can be any combination of
   This option required the python package `unidecode`.
 
 
-## Clear(Disable) Snippets
+# Clear(Disable) Snippets
 
 Add `clearsnippets` to snippet files to disable some specified snippets.
 
@@ -373,7 +373,7 @@ Add `clearsnippets` to snippet files to disable some specified snippets.
     Disable snippets whose trigger word is `printf`, `title` or `box`. To do this, the priority of `clearsnippets` must not be smaller than other snippets`.
 
 
-## Context
+# Context
 
 Custom context snippets can be enabled by using the `e` option in the snippet
 definition.
@@ -439,7 +439,7 @@ endsnippet
 ```
 
 
-## Snippet Actions
+# Snippet Actions
 
 * Pre-expand: invoked just after trigger condition was matched, but before snippet actually expanded;
 * Post-expand: invoked after snippet was expanded and interpolations were applied for the first time, but before jump on the first placeholder.
@@ -457,7 +457,7 @@ endsnippet
     endsnippet
 
 
-### Pre-expand and Post-expand Actions
+## Pre-expand and Post-expand Actions
 
 Buffer can be modified in pre-expand action code through variable called
 `snip.buffer`, snippet expansion position will be automatically adjusted.
@@ -475,7 +475,7 @@ Buffer can be modified in pre-expand action code through variable called
     endsnippet
 
 
-### Post-jump Actions
+## Post-jump Actions
 
 Post-jump actions can be used to trigger some code based on user input into the placeholders.
 

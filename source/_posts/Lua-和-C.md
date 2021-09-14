@@ -25,13 +25,13 @@ Lua 是一种
 
 <!-- more -->
 
-## 头文件
+# 头文件
 
 - `lua.h`：Lua 提供的基础函数，如创建新 Lua 环境、调用 Lua 函数、读写环境中全局变量以及注册供 Lua 调用的新函数的函数。这些函数都以 `lua_` 开头。
 - `lauxlib.h`：**辅助库**（auxlibary library, auxlib）所提供的函数，使用 `lua.h` 中的基础 API 实现更高层次的抽象。这些函数以 `luaL_` 开头。
 - `lualib.h`：用于操作 Lua 标准库。其中的函数也以 `luaL_` 开头。
 
-## 栈
+# 栈
 
 Lua 通过维护一个虚拟栈来完成 Lua 代码和 C 代码之间的交流。C API 中的函数若需要传入栈索引，这个索引必须是**有效索引**或**可接受索引**。
 
@@ -115,12 +115,12 @@ void lua_replace   (lua_State *L, int index);
 void lua_copy      (lua_State *L, int fromidx, int toidx);
 ```
 
-## C API 中的错误处理
+# C API 中的错误处理
 
 > 用异常来提示错误，而没有在 API 的每个操作中使用错误码。与 C++ 或 Java 不同，C 语言没有提供异常处理机制。为了解决这个问题，Lua 使用了 C 语言中的 `setjmp` 机制，`setjmp` 营造了一个*类似异常处理的机制*。
 > 因此，大多数 API 都可以抛出异常（即调用 `longjmp`）而不是直接返回。
 
-### 处理应用代码中的错误
+## 处理应用代码中的错误
 
 在应用代码中，如果没有为 `longjmp` 准备对应的 `setjmp`，API 中的任何错误都会导致 Lua 调用紧急函数（panic function），这个函数返回时，应用就会退出。
 我们可以通过 `lua_atpanic` 设置自己的紧急函数，但是作用不大。
@@ -140,12 +140,12 @@ int secure_foo(lua_State *L) {
 }
 ```
 
-### 处理库代码中的错误
+## 处理库代码中的错误
 
 在编写**库代码**时，通常无需进行额外的操作。库函数抛出的错误要么被 Lua 中的 `pcall` 捕获，要么被应用代码中的 `lua_pcall` 捕获（这就要求应用代码需要按照上文中的方式编写）。
 因此，当库代码中的函数检测到错误时，只需简单地调用 `lua_error`（或 `luaL_error`）即可。`lua_error` 会以栈顶的值作为**错误对象**(error object)（“a single value”，`lua_pcall` 会在检测到错误时会将其置于栈顶），抛出一个 Lua 错误。
 
-## 内存分配
+# 内存分配
 
 Lua 的 C API 并不一定要通过调用 `malloc` 等函数来分配内存，而是可以通过用户自己实现的一个**分配函数**（allocation function）来分配和释放内存。
 
@@ -197,7 +197,7 @@ void* l_alloc(void* ud, void* ptr, size_t osize, size_t nsize) {
 }
 ```
 
-## 在 Lua 中调用 C 语言
+# 在 Lua 中调用 C 语言
 
 Lua 调用 C 函数时，每个 C 函数痘有其独立的**局部栈**，其第一个参数总是位于局部栈中索引为 1 的位置。
 
@@ -273,7 +273,7 @@ stack traceback:
 ```
 {% endnote %}
 
-### 注册表
+## 注册表
 
 Lua API 中通过使用注册表来实现“全局变量”。使用这一功能需要一对函数：
 
@@ -324,7 +324,7 @@ myStr = lua_tostring(L, -1);
 ```
 {% endnote %}
 
-### 上值和共享上值
+## 上值和共享上值
 
 Lua 中可以为一个函数绑定若干个**上值**，这些上值仅在绑定的函数中可见。
 一个函数和其上值的关联称为**闭包**（closure）。
@@ -355,9 +355,9 @@ lua_newtable(L);
 lua_setfuncs(L, lib, 1);
 ```
 
-## 实例
+# 实例
 
-### 输出整个栈中的内容
+## 输出整个栈中的内容
 
 ```c
 static void stackDump (lua_State* L) {
@@ -389,7 +389,7 @@ static void stackDump (lua_State* L) {
 }
 ```
 
-### 实现 Lua 的 dir 函数
+## 实现 Lua 的 dir 函数
 
 Lua 标准库中没有 `dir` 函数（读取目录下的所有文件），但是我们可以自己实现：
 
@@ -446,7 +446,7 @@ int luaopen_libdir(lua_State *L) {
 dir = require"libdir"   --> 
 dir.dir('.')  --> table: 0x5580923c1af0
 ```
-### 上值和工厂函数
+## 上值和工厂函数
 
 ```c
 // 前置声明

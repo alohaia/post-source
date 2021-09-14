@@ -3,15 +3,17 @@ title: Grammar Testing
 date: 2021-03-15 11:54:13
 mathjax: true
 comments: false
+tags:
+    - Test
 ---
 
 语法测试用。
 
 <!-- more -->
 
-@[toc]
+[[toc]]
 
-## reason
+# reason
 
 I use **[hexo-theme-next](https://github.com/iissnan/hexo-theme-next)** for my blog, and I met a problem same with [#826](https://github.com/iissnan/hexo-theme-next/issues/826). 
 
@@ -80,12 +82,7 @@ A) asdfa
 B) asdf
 C) asdfasd
 
-Term 1
-:   Definition 1
-:   Definition 2
-At The Begin
-
-Term 2 with *inline markup*
+Term with *inline markup*
 : Characteristics
     - Characteristic 1
         ```cpp test.cpp
@@ -94,12 +91,6 @@ Term 2 with *inline markup*
         }
         ```
     - Characteristic 2
-
-Term 1
-    : Definition 2
-
-    : Definition 2
-    : Definition 2
 
 The hexo default [hexo-renderer-marked](https://github.com/hexojs/hexo-renderer-marked)
 do not support LaTex parser, you must referer external link to parse Latex grammar to 
@@ -131,7 +122,7 @@ $$
 $$
 ```
 
-## hexo-renderer-markdown-it-plus
+# hexo-renderer-markdown-it-plus
 
 [**hexo-renderer-markdown-it-plus**](https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus) support lines grammer for $\KaTeX$(Don't worry, it's grammer same with Latex).
 
@@ -152,23 +143,17 @@ $$
 H=-\sum_{i=1}^N (\sigma_{i}^x \sigma_{i+1}^x+g \sigma_{i}^z)
 $$
 
-^link^
-
-$$
-f(n) = \begin{cases}
+$$f(n) = \begin{cases}
  \frac{n}{2},
  & \text{if } n\text{ is even}
  \\ 3n+1, & \text{if } n\text{ is odd}
- \end{cases}
-$$
+ \end{cases}$$
 
-$$
-\begin{aligned}
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   
+$$\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\
 \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
 \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}
-$$
+\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}$$
 
 BTW, i bundle some plugins, example below:
 
@@ -243,14 +228,14 @@ Term 2 with *inline markup*
 10. ==mark==, `==mark==`
 ```
 
-## Tag-plugins
+# Tag-plugins
 
 Docs: https://hexo.io/zh-cn/docs/tag-plugins.html
 
-### Link
+## Link
 {% link Baidu https://www.baidu.com https://www.google.com ExtBaidu %}
 
-### Code Block
+## Code Block
 
 {% codeblock test.cpp lang:cpp https://www.aloha.org.cn "Aloha' Blog" first_line:46 mark:1-3,49-56 %}
 GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", glfwGetPrimaryMonitor(), NULL);
@@ -274,30 +259,30 @@ glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 cout << "Hello world!" << endl;
 ```
 
-### Include Code
+## Include Code
 
 {% include_code proj6-camera.cpp lang:cpp from:307 to:325 proj6-camera.cpp %}
 
 
-### Iframe
+## Iframe
 
 {% iframe https://theme-next.iissnan.com/tag-plugins.html 800 600 %}
 
-### Image
+## Image
 
 {% img right "/images/aloha.gif" 200 "aloha'aloha'" %}
 
 - `img.right`、`img.left` 会分别在右、左边浮动显示。
 - `img` 的高度不超过 `35em`。
 
-### Pull Quote
+## Pull Quote
 
 {% pullquote %}
 content
 What's this?
 {% endpullquote %}
 
-### Reference
+## Reference
 
 {% post_link The-TTY-Demystified "The <b>TTY</b> Demystified" false %}
 
@@ -305,7 +290,7 @@ What's this?
 
 {% post_link The-TTY-Demystified "The TTY Demystified" false %}
 
-### Asset Resource
+## Asset Resource
 
 > 需要将 `_config.yml` 文件中的 `post_asset_folder` 选项设为 `true` 来打开。
 > > asfasdf
@@ -316,10 +301,9 @@ What's this?
 {% asset_link slug [title] %}
 ```
 
+## NexT tags
 
-### NexT tags
-
-#### Call Out
+### Call Out
 
 {% note default default@default %}
 default
@@ -345,7 +329,7 @@ warning
 danger
 {% endnote %}
 
-#### Button
+### Button
 
 `button` or `btn`
 
@@ -381,7 +365,7 @@ hexo.extend.tag.register('button', postButton, {ends: false});
 hexo.extend.tag.register('btn', postButton, {ends: false});
 ```
 
-#### caniUse
+### caniUse
 
 ```javascript
 'use strict';
@@ -403,16 +387,16 @@ hexo.extend.tag.register('caniuse', caniUse);
 hexo.extend.tag.register('can', caniUse);
 ```
 
-#### Center Quote
+### Center Quote
 
 `centerquote` or `cq`
 
 {% cq %}
-So we beat on, boats against the current, borne back ceaselessly into the past.<br/>
+So we beat on, boats against the current, borne back ceaselessly into the past.
 我们奋力向前，宛如逆水行舟，与激流抗争勇进，直至淹没入岁月长河。
 {% endcq %}
 
-#### Group Pictures
+### Group Pictures
 
 ```javascript
 'use strict';
@@ -552,7 +536,7 @@ hexo.extend.tag.register('grouppicture', groupPicture, {ends: true});
 hexo.extend.tag.register('gp', groupPicture, {ends: true});
 ```
 
-#### Label
+### Label
 
 sepqrate: @
 
@@ -565,7 +549,7 @@ sepqrate: @
 - danger
 - warning
 
-#### Mermaid
+### Mermaid
 
 ```javascript
 'use strict';
@@ -584,7 +568,7 @@ hexo.extend.tag.register('mermaid', mermaid, {ends: true});
     - Github: https://github.com/mermaid-js/mermaid 、http://mermaid-js.github.io/mermaid/#/flowchart
     - Live editor: https://mermaidjs.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW0hhcmRdIC0tPnxUZXh0fCBCKFJvdW5kKVxuICAgIEIgLS0-IEN7RGVjaXNpb259XG4gICAgQyAtLT58T25lfCBEW1Jlc3VsdCAxXVxuICAgIEMgLS0-fFR3b3wgRVtSZXN1bHQgMl0iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ
 
-#### Pdf
+### Pdf
 
 ```javascript
 'use strict';
@@ -597,7 +581,7 @@ function pdf(args) {
 hexo.extend.tag.register('pdf', pdf, {ends: false});
 ```
 
-#### Tabs
+### Tabs
 
 `tabs` or `subtabs` or `subsubtabs`
 
@@ -651,3 +635,29 @@ Sub content 2
 <!-- endtab -->
 
 {% endtabs %}
+
+### [hexo-blog-encrypt](https://github.com/D0n9X1n/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
+
+```yaml 文章信息头
+---
+title: Hello World
+tags:
+  - 作为日记加密
+date: 2016-03-30 21:12:21
+password: mikemessi
+abstract: 有东西被加密了, 请输入密码查看.
+message: 您好, 这里需要密码.
+theme: xray
+wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.
+---
+```
+
+```yaml _config.yml
+encrypt:
+  abstract: 本文已加密，请联系我以获取密码，联系方式见 About 页面。
+  message: 请输入密码查看
+  theme: default # default | blink | shrink | flip | up | surge | wave | xray
+  tags:
+    - {name: Test, password: melody}
+  wrong_pass_message: 密码错误！
+```

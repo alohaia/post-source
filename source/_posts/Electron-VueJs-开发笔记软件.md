@@ -15,9 +15,9 @@ categories:
 
 <!-- more -->
 
-## 搭建基本项目
+# 搭建基本项目
 
-### 相关依赖
+## 相关依赖
 
 - node、npm（cnpm、yarn）
 - vue-cli：
@@ -26,7 +26,7 @@ categories:
   ```
 - 
 
-### vue 基本项目
+## vue 基本项目
 
 如在 electron-vue 目录下创建项目：
 ```bash
@@ -39,7 +39,7 @@ vue create electron-vue
 注意路由（router）不要启用 histroy 模式，否则最后打包时会出现问题。
 {% endnote %}
 
-### 加入 electron
+## 加入 electron
 
 安装 [vue-cli-plugin-electron-builder](https://nklayman.github.io/vue-cli-plugin-electron-builder/)：
 
@@ -65,7 +65,7 @@ npm run electron:build
 首次进行这两个步骤需要访问境外资源，可能会由于网络原因而失败（解决方法不便明说）。
 {% endnote %}
 
-### 配置 Electron Builder
+## 配置 Electron Builder
 
 文档：
 - https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/configuration.html#configuring-electron-builder

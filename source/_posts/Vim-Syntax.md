@@ -13,13 +13,13 @@ categories:
 
 <!-- more -->
 
-## 优先级
+# 优先级
 
 1. 多个 Match 或 Region 的匹配项在相同位置起始时，最后定义的优先。
 2. Keyword 优先级高于 Match 和 Region。
 3. 在更靠前的位置起始的匹配项优先。
 
-## 其他
+# 其他
 
 - 大小写：`:h syn-case`
 - 折叠深度：`:h syn-foldlevel`

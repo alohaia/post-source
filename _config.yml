@@ -72,7 +72,7 @@ tag_map:
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
-meta_generator: false
+meta_generator: true
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -92,6 +92,9 @@ pagination_dir: page
 ## include:/exclude: options only apply to the 'source/' folder
 include:
 exclude:
+  - "_posts/Session.vim"
+  - "_posts/*.Rmd"
+  - "_posts/.*"
 ignore:
 
 # Extensions
@@ -115,73 +118,87 @@ search:
   format: html
 
 ## Docs: https://github.com/CHENXCHEN/hexo-renderer-markdown-it-plus
-markdown_it_plus:
-    highlight: true
-    html: true
-    xhtmlOut: true
-    breaks: false
-    langPrefix: 'language-'
-    linkify: true
-    typographer:
-    quotes: “”‘’
-    pre_class: highlight
-    plugins:
-        - plugin:
-            name: markdown-it-toc-and-anchor
-            enable: true
-            options:
-                toc: true
-                tocClassName: 'markdownIt-TOC'
-                tocFirstLevel: 2
-                tocLastLevel: 6
-                tocCallback:
-                anchorLink: true
-                anchorLinkSymbol: '#'
-                anchorFirstLevel: 2
-                anchorLastLevel: 4
-                anchorLinkSpace: true
-                anchorLinkSymbolClassName:
-                anchorLinkBefore: false
-                anchorClassName: 'markdownIt-Anchor'
-                resetIds: true
-        - plugin:   # https://github.com/linsir/markdown-it-task-checkbox
-            name: markdown-it-task-checkbox
-            enable: true
-            options:
-                disable: true   ## 默认
-                divWrap: true
-                divClass: checkbox
-                idPrefix: cbx_
-                ulClass: task-list
-                liClass: task-list-item
+# markdown_it_plus:
+#   highlight: true
+#   html: true
+#   xhtmlOut: true
+#   breaks: false
+#   langPrefix: 'language-'
+#   linkify: true
+#   typographer:
+#     quotes: “”‘’'"
+#   pre_class: highlight
+#   plugins:
+#     - plugin:
+#       name: markdown-it-toc-and-anchor
+#       enable: true
+#       options:
+#         toc: true
+#         tocClassName: 'markdownIt-TOC'
+#         tocFirstLevel: 2
+#         tocLastLevel: 6
+#         tocCallback:
+#         anchorLink: true
+#         anchorLinkSymbol: ''
+#         anchorFirstLevel: 2
+#         anchorLastLevel: 4
+#         anchorLinkSpace: false
+#         anchorLinkSymbolClassName: 'markdownIt-Anchor'
+#         anchorLinkBefore: true
+#         anchorClassName: 'markdownIt-Anchor'
+#         resetIds: true
+#     - plugin:   # https://github.com/linsir/markdown-it-task-checkbox
+#       name: markdown-it-task-checkbox
+#       enable: true
+#       options:
+#         disable: true   ## 默认
+#         divWrap: true
+#         divClass: checkbox
+#         idPrefix: cbx_
+#         ulClass: task-list
+#         liClass: task-list-item
 
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
-# markdown:
-#     render:
-#         html: true
-#         xhtmlOut: false
-#         breaks: true
-#         linkify: true
-#         typographer: true
-#         quotes: '“”‘’'
-#     enable_rules:
-#     disable_rules:
-#     plugins:
-#         - markdown-it-abbr
-#         - markdown-it-footnote
-#         - markdown-it-ins
-#         - markdown-it-sub
-#         - markdown-it-sup
-#     anchors:
-#         level: 2
-#         collisionSuffix: 'v'
-#         permalink: true
-#         permalinkClass: 'header-anchor'
-#         permalinkSide: 'left'
-#         permalinkSymbol: '¶'
-#         case: 0
-#         separator: ''
+markdown:
+  render:
+    html: true
+    xhtmlOut: true
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: “”‘’'"
+    langPrefix: 'lang-'
+  preset: 'default'
+  # enable_rules:
+  # disable_rules:
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+    - name: markdown-it-table-of-contents # https://github.com/cpadilla/markdown-it-table-of-contents
+      options:
+        includeLevel: [1,3]
+        containerClass: table-of-contents
+        # markerPattern: '/^\\[\\[toc\\]\\]/im'
+        listType: 'ul'
+    - markdown-it-emoji
+    - markdown-it-task-checkbox
+    - markdown-it-deflist
+    - markdown-it-mark
+    - "@iktakahiro/markdown-it-katex"
+    - markdown-it-div
+  anchors:
+    level: 1
+    collisionSuffix: ''
+    permalink: true
+    permalinkClass: 'header-anchor'
+    permalinkSide: 'right'
+    permalinkSymbol: ''
+    case: 0
+    separator: ''
 
 # RSS
 feed:
@@ -229,10 +246,24 @@ admin:
 #     # use: ./wives/wanko # 相对于博客根目录的路径
 #     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
 
-# hexo-all-minifier
-## https://github.com/chenzhutian/hexo-all-minifier
+# [hexo-all-minifier](https://github.com/chenzhutian/hexo-all-minifier)
 all_minifier: false
 
-exif:
-  enable: true
-  template: "{FileSource} {FocalLength}mm f/{FNumber} {ExposureTime}s"
+coauthors:
+  [郭渝怀]:
+    # It will display nick
+    nick: 郭老师
+    # When your co-authors is click, will jump to there
+    link: https://www.sdiopid.top
+  # It defines the order of precedence in post meta
+  #post_meta_order: 0
+
+# [hexo-blog-encrypt](https://github.com/D0n9X1n/hexo-blog-encrypt/blob/master/ReadMe.zh.md)
+encrypt:
+  silent: true
+  abstract: 本文已加密，请联系我以获取密码，联系方式见 About 页面。
+  message: 在此输入密码，若无密码，请联系我以获取密码，联系方式见 About 页面
+  theme: up # default | blink | shrink | flip | up | surge | wave | xray
+  tags:
+    - {name: Test, password: melody}
+  wrong_pass_message: 密码错误！
